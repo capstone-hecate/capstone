@@ -20,7 +20,7 @@ class Card extends Component {
           <label htmlFor="name">Name:</label>
           <input name="name" value={name} type="text" />
           <label htmlFor="recepientEmail">Recipient Email:</label>
-          <input name="content" value={textBox} type="text" />
+          <input name="content" value={recipientEmail} type="text" />
           <label htmlFor="textBox">Content:</label>
           <input name="content" value={textBox} type="text" />
         </form>
