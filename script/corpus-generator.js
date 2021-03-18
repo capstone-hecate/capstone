@@ -10,16 +10,19 @@ async function corpusMaker() {
     })
     const quotes = results.data
 
-    console.log(quotes.length)
+    // console.log(quotes.length)
     //quotes.length === 1643
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < quotes.length; i++) {
       corpus += quotes[i].text
       corpus += ' '
     }
+    return corpus
   } catch (error) {
     console.log(error)
   }
 }
 
 corpusMaker()
+
+module.exports = corpus
