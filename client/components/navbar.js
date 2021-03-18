@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import Navbar from 'react-bootstrap/Navbar'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>BOILERMAKER</h1>
-    <nav>
+const NavBar = ({handleClick, isLoggedIn}) => (
+  <Navbar bg="light" expand="lg" sticky="top">
+    <h2>eGreetr</h2>
+
+    <Navbar.Text className="justify-content-end">
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
@@ -19,13 +21,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/login">Login</Link> <Link to="/signup">Sign Up</Link>
         </div>
       )}
-    </nav>
-    <hr />
-  </div>
+    </Navbar.Text>
+  </Navbar>
 )
 
 /**
@@ -45,7 +45,7 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(NavBar)
 
 /**
  * PROP TYPES
