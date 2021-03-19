@@ -9,9 +9,8 @@ const Card = db.define('card', {
       notEmpty: true
     }
   },
-  imageURL: {
-    type: Sequelize.TEXT,
-    defaultValue: ''
+  imageUrl: {
+    type: Sequelize.STRING
   },
   template: {
     type: Sequelize.ENUM('templateOne, templateTwo, templateThree')

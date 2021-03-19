@@ -1,8 +1,6 @@
 const router = require('express').Router()
 const {Card} = require('../db/models')
 const multer = require('multer')
-const {path} = require('..')
-
 module.exports = router
 
 //GET /api/cards/:cardId
@@ -21,31 +19,40 @@ router.get('/:cardId', async (req, res, next) => {
 })
 
 //set storage engine
-const storage = multer.diskStorage({
-  destination: './public/uploads',
-  filename: function(req, file, cb) {
-    cb(
-      null,
-      file.fieldname + '-' + Date.now() + path.extname(file.originalname)
-    )
-  }
-})
-//init upload
+// const storage = multer.diskStorage({
+//   destination: './public/uploads',
+//   filename: function(req, file, cb) {
+//     cb(
+//       null,
+//       file.fieldname + '-' + Date.now() + file.originalname
+//     )
+//   }
+// })
+// //init upload
+// const upload = multer({
+//   storage: storage
+// })
 const upload = multer({
-  storage: storage
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => cb(null, 'public/uploads'),
+    filename: (req, file, cb) => cb(null, Date.now() + file.originalname)
+  })
 })
 
 //POST api/cards/card
-router.post('/card', upload.single('imageUrl'), async (req, res, next) => {
+router.post('/card', upload.single('file'), async (req, res, next) => {
   try {
-    const card = await Card.create({
-      name: req.body.name,
-      yourEmail: req.body.yourEmail,
+    console.log('------------', req.file.filename)
+    const card = await Card.build({
+      // name: req.body.name,
+      // yourEmail: req.body.yourEmail,
       recipientName: req.body.recipientName,
       recipientEmail: req.body.recipientEmail,
-      imageUrl: '/uploads/' + req.imageUrl,
+      imageUrl: '/uploads/' + req.file.filename,
       text: req.body.text
     })
+    await card.save()
+    console.log('===========>', card)
     res.json(card)
   } catch (err) {
     next(err)
