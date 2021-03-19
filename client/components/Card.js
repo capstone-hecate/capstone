@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Upload from './Upload'
 
 class Card extends Component {
   constructor() {
@@ -13,32 +14,43 @@ class Card extends Component {
       yourEmail: '',
       recipientName: '',
       recipientEmail: '',
-      imageUrl: '',
-
+      file: null,
       text: ''
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleChange(evt) {
     this.setState({[evt.target.name]: evt.target.value})
   }
-  handleSubmit(evt) {
-    evt.preventDefault()
-    this.props.newCard({...this.state})
-  }
+  // handleSubmit(evt) {
+  //   evt.preventDefault()
+  //   this.props.newCard({...this.state})
+  // }
   render() {
     const {
       name,
       yourEmail,
       recipientName,
-      imageUrl,
       recipientEmail,
+      file,
       text
     } = this.state
     return (
       <Container>
-        <Form>
+        <Form
+          onSubmit={async evt => {
+            evt.preventDefault()
+            const fd = new FormData()
+            fd.append('name', name)
+            fd.append('yourEmail', yourEmail)
+            fd.append('recipientName', recipientName)
+            fd.append('recipientEmail', recipientEmail)
+            fd.append('file', file)
+            fd.append('text', text)
+            this.props.newCard(fd)
+          }}
+        >
           <h1>Make your card!</h1>
           <Form.Group id="card-form" onSubmit={this.handleSubmit}>
             <Form.Label htmlFor="name">Your name</Form.Label>
@@ -76,8 +88,7 @@ class Card extends Component {
               type="text"
             />
 
-            <Form.Label htmlFor="imageUrl">Upload Image</Form.Label>
-            <Form.Control name="imageUrl" value={imageUrl} type="file" />
+            <Upload />
 
             <Form.Label htmlFor="textBox">Content</Form.Label>
             <Form.Control
