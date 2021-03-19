@@ -1,7 +1,8 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-scroll'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 import Card from './Card'
 
 let templates = [
@@ -25,7 +26,7 @@ class ChooseTemplate extends React.Component {
   render() {
     return (
       <>
-        <Container>
+        <Jumbotron>
           <h3 className="centered-header">Choose your template:</h3>
           <img
             src="happy-birthday.jpg"
@@ -50,11 +51,20 @@ class ChooseTemplate extends React.Component {
           />
 
           <div>
-            <Link to="/card">
-              <Button type="submit">Next step</Button>
+            <Link
+              activeClass="active"
+              to="card"
+              smooth={true}
+              spy={true}
+              offset={-70}
+              duration={500}
+            >
+              <Button type="submit" variant="dark">
+                Next step
+              </Button>
             </Link>
           </div>
-        </Container>
+        </Jumbotron>
       </>
     )
   }
