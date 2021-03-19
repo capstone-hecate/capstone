@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 import Upload from './Upload'
 
 const Card = ({createNewCard}) => {
@@ -43,7 +44,7 @@ const Card = ({createNewCard}) => {
   //     text
   //   } = this.state
   return (
-    <Container>
+    <Jumbotron id="card">
       <Form
         onSubmit={async evt => {
           evt.preventDefault()
@@ -57,7 +58,7 @@ const Card = ({createNewCard}) => {
           createNewCard(fd)
         }}
       >
-        <h1>Make your card!</h1>
+        <h3 className="centered-header">Make your card!</h3>
         <Form.Group id="card-form">
           <Form.Label htmlFor="name">Your name</Form.Label>
           <Form.Control
@@ -109,7 +110,7 @@ const Card = ({createNewCard}) => {
           </Button>
         </Form.Group>
       </Form>
-    </Container>
+    </Jumbotron>
   )
 }
 

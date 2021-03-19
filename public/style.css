@@ -52,3 +52,8 @@ img {
   background-color: purple;
   border: purple;
 }
+
+.empty-div {
+  height: 500px;
+  width: 100vh;
+}
