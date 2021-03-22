@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Navbar, ChooseTemplate, Card, Empty} from './components'
+import {Navbar, ChooseTemplate, Card, Empty, FinalCard} from './components'
 import Routes from './routes'
 
 const App = () => {
@@ -10,6 +10,8 @@ const App = () => {
       <ChooseTemplate />
       <Empty />
       <Card />
+      <Empty />
+      <FinalCard />
       <Routes />
     </div>
   )
