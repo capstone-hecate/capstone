@@ -94,7 +94,10 @@ const Card = ({createNewCard}) => {
           <Form.Label>Upload your photo</Form.Label>
           <Form.Control
             type="file"
-            onChange={e => setFile(e.target.files[0])}
+            onChange={e => {
+              console.log(e.target.files[0])
+              setFile(e.target.files[0])
+            }}
           />
 
           <Form.Label htmlFor="textBox">Content</Form.Label>
