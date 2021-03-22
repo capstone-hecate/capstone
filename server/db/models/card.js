@@ -19,7 +19,7 @@ const Card = db.define('card', {
     type: Sequelize.BLOB
   },
   template: {
-    type: Sequelize.ENUM('happy-birthday, thank-you, general')
+    type: Sequelize.ENUM('happy-birthday', 'thank-you', 'general')
   },
   recipientName: {
     type: Sequelize.STRING,
