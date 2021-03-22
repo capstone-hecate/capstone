@@ -1,53 +1,24 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {createNewCard} from '../store/card'
 import {connect} from 'react-redux'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import Upload from './Upload'
 
-const Card = ({createNewCard}) => {
+const Card = props => {
   const [name, setName] = useState('')
   const [yourEmail, setYourEmail] = useState('')
   const [recipientName, setRecipientName] = useState('')
   const [recipientEmail, setRecipientEmail] = useState('')
   const [file, setFile] = useState(null)
   const [text, setText] = useState('')
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     name: '',
-  //     yourEmail: '',
-  //     recipientName: '',
-  //     recipientEmail: '',
-  //     file: null,
-  //     text: ''
-  //   }
-  //   this.handleChange = this.handleChange.bind(this)
-  //   // this.handleSubmit = this.handleSubmit.bind(this)
-  // }
-  // handleChange(evt) {
-  //   this.setState({[evt.target.name]: evt.target.value})
-  // }
-  // handleSubmit(evt) {
-  //   evt.preventDefault()
-  //   this.props.newCard({...this.state})
-  // }
-  // render() {
-  //   const {
-  //     name,
-  //     yourEmail,
-  //     recipientName,
-  //     recipientEmail,
-  //     file,
-  //     text
-  //   } = this.state
+
   return (
     <Jumbotron id="card">
       <Form
         onSubmit={async evt => {
           evt.preventDefault()
+          let template = props.getTemplate()
           const fd = new FormData()
           fd.append('name', name)
           fd.append('yourEmail', yourEmail)
@@ -55,7 +26,8 @@ const Card = ({createNewCard}) => {
           fd.append('recipientEmail', recipientEmail)
           fd.append('file', file)
           fd.append('text', text)
-          createNewCard(fd)
+          fd.append('template', template)
+          props.createNewCard(fd)
         }}
       >
         <h3 className="centered-header">Make your card!</h3>
@@ -117,7 +89,11 @@ const Card = ({createNewCard}) => {
   )
 }
 
+const mapState = state => ({
+  template: state.template
+})
+
 const mapDispatch = dispatch => ({
   createNewCard: card => dispatch(createNewCard(card))
 })
-export default connect(null, mapDispatch)(Card)
+export default connect(mapState, mapDispatch)(Card)

@@ -1,17 +1,20 @@
 import React from 'react'
 
-import {Navbar, ChooseTemplate, Card, Empty, FinalCard} from './components'
+import {
+  Navbar,
+  ChooseTemplate,
+  Card,
+  Empty,
+  FinalCard,
+  Parent
+} from './components'
 import Routes from './routes'
 
 const App = () => {
   return (
     <div>
       <Navbar />
-      <ChooseTemplate />
-      <Empty />
-      <Card />
-      <Empty />
-      <FinalCard />
+      <Parent />
       <Routes />
     </div>
   )
