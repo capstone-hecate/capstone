@@ -16,14 +16,12 @@ class ChooseTemplate extends React.Component {
     this.onClick = this.onClick.bind(this)
   }
 
-  async onClick(templateName) {
-    await this.setState({template: templateName})
-    console.log(this.state)
+  onClick(templateName) {
+    this.setState({template: templateName})
     this.props.selectTemplate(templateName)
   }
 
   render() {
-    console.log('props in choose template', this.props)
     return (
       <>
         <Jumbotron>

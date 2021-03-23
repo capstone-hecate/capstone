@@ -18,17 +18,19 @@ const Card = props => {
 
   const loadText = async () => {
     const corpus = await corpusMaker()
-    const poem = generatePoem(await corpus, 3)
+    const poem = generatePoem(corpus, 3)
     setText(poem)
     isGenerating(false)
   }
+
+  let template = props.template
+  console.log(props, 'Card.js Template')
 
   return (
     <Jumbotron id="card">
       <Form
         onSubmit={async evt => {
           evt.preventDefault()
-          let template = props.getTemplate()
           const fd = new FormData()
           fd.append('name', name)
           fd.append('yourEmail', yourEmail)
@@ -73,7 +75,7 @@ const Card = props => {
             type="text"
           />
 
-          <Form.Label>Upload your photo</Form.Label>
+          <Form.Label>Upload your photo (optional)</Form.Label>
           <Form.Control
             type="file"
             onChange={e => {
@@ -109,7 +111,23 @@ const Card = props => {
             offset={-70}
             duration={500}
           >
-            <Button variant="dark" type="submit">
+            <Button
+              variant="dark"
+              type="button"
+              onClick={e => {
+                e.preventDefault()
+                console.log('onClick of Card.js')
+                const fd = new FormData()
+                fd.append('name', name)
+                fd.append('yourEmail', yourEmail)
+                fd.append('recipientName', recipientName)
+                fd.append('recipientEmail', recipientEmail)
+                fd.append('file', file)
+                fd.append('text', text)
+                fd.append('template', template)
+                props.createNewCard(fd)
+              }}
+            >
               Make my card!
             </Button>
           </Link>
@@ -119,11 +137,11 @@ const Card = props => {
   )
 }
 
-const mapState = state => ({
-  template: state.template
-})
+// const mapState = state => ({
+//   template: state.template
+// })
 
 const mapDispatch = dispatch => ({
   createNewCard: card => dispatch(createNewCard(card))
 })
-export default connect(mapState, mapDispatch)(Card)
+export default connect(null, mapDispatch)(Card)

@@ -24,7 +24,9 @@ var upload = multer({dest: 'uploads/'})
 router.post('/', upload.single('file'), async (req, res, next) => {
   try {
     console.log('req.body-->', req.body)
-    var imageData = fs.readFileSync(req.file.path)
+    if (req.file) {
+      var imageData = fs.readFileSync(req.file.path)
+    }
     const card = await Card.create({
       name: req.body.name,
       yourEmail: req.body.yourEmail,
