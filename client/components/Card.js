@@ -19,12 +19,18 @@ const Card = props => {
   const loadText = async () => {
     const corpus = await corpusMaker()
     const poem = generatePoem(corpus, 3)
-    setText(poem)
+    const generatedText = `Dear ${recipientName}, \n${poem}Yours, ${name}`
+    setText(generatedText)
+    props.setGeneratedText(generatedText)
     isGenerating(false)
   }
 
+  const setEditedText = text => {
+    props.setGeneratedText(text)
+  }
+
   let template = props.template
-  console.log(props, 'Card.js Template')
+  // console.log(props, 'Card.js Template')
 
   return (
     <Jumbotron id="card">
@@ -89,7 +95,10 @@ const Card = props => {
             as="textarea"
             rows={3}
             name="text"
-            onChange={e => setText(e.target.value)}
+            onChange={e => {
+              setText(e.target.value)
+              setEditedText(e.target.value)
+            }}
             type="text"
             value={text}
           />

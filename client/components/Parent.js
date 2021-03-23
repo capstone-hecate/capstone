@@ -4,19 +4,19 @@ import {ChooseTemplate, Card, Empty, FinalCard} from './index'
 class Parent extends React.Component {
   constructor() {
     super()
-    this.state = {template: ''}
+    this.state = {
+      template: '',
+      text: ''
+    }
     this.selectTemplate = this.selectTemplate.bind(this)
-    this.getTemplate = this.getTemplate.bind(this)
   }
 
   selectTemplate(template) {
     this.setState({template: template})
   }
-
-  getTemplate() {
-    return this.state.template
+  setGeneratedText(text) {
+    this.setState({text: text})
   }
-
   render() {
     console.log(this.state, 'Parent.js state')
     return (
@@ -25,9 +25,12 @@ class Parent extends React.Component {
           selectTemplate={template => this.selectTemplate(template)}
         />
         <Empty />
-        <Card template={this.state.template} />
+        <Card
+          template={this.state.template}
+          setGeneratedText={text => this.setGeneratedText(text)}
+        />
         <Empty />
-        <FinalCard />
+        <FinalCard template={this.state.template} text={this.state.text} />
       </>
     )
   }
