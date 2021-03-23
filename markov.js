@@ -1,3 +1,5 @@
+// Is this file still needed or did word-markov replace it?
+
 const axios = require('axios')
 
 async function corpusMaker() {

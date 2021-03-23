@@ -18,7 +18,7 @@ const Card = props => {
 
   const loadText = async () => {
     const corpus = await corpusMaker()
-    const poem = generatePoem(await corpus, 3)
+    const poem = generatePoem(await corpus, 3) // awaiting twice?
     setText(poem)
     isGenerating(false)
   }
@@ -28,7 +28,7 @@ const Card = props => {
       <Form
         onSubmit={async evt => {
           evt.preventDefault()
-          let template = props.getTemplate()
+          let template = props.getTemplate() // use props.template
           const fd = new FormData()
           fd.append('name', name)
           fd.append('yourEmail', yourEmail)

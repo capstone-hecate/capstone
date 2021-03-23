@@ -1,6 +1,8 @@
 import React from 'react'
 import {ChooseTemplate, Card, Empty, FinalCard} from './index'
 
+// Mixing class components with functional (hook) components
+
 class Parent extends React.Component {
   constructor() {
     super()
@@ -24,7 +26,7 @@ class Parent extends React.Component {
           selectTemplate={template => this.selectTemplate(template)}
         />
         <Empty />
-        <Card getTemplate={this.getTemplate} />
+        <Card getTemplate={this.getTemplate} /> // replace getTemplate with this.state.template
         <Empty />
         <FinalCard />
       </>

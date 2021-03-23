@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 
+// Is this component being used?
+
 function Upload() {
   const [file, setFile] = useState(null)
   return (

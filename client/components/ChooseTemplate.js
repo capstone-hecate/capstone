@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import {Link} from 'react-scroll'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 
+// Good start, eventually I think this collection of templates can live in its own file or in the database
 let templates = [
   {name: 'happy-birthday', image: 'happy-birthday.jpg'},
   {name: 'thank-you', image: 'thank-you.jpg'},
@@ -17,7 +18,7 @@ class ChooseTemplate extends React.Component {
   }
 
   async onClick(templateName) {
-    await this.setState({template: templateName})
+    await this.setState({template: templateName}) // awaiting this.setState doesn't really do what you think it does, remove this line
     console.log(this.state)
     this.props.selectTemplate(templateName)
   }
