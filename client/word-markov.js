@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-async function corpusMaker() {
+export async function corpusMaker() {
   try {
     let corpus = ''
     const results = await axios.request({
@@ -9,6 +9,8 @@ async function corpusMaker() {
     })
     const quotes = results.data
 
+    let text
+
     // console.log(quotes.length)
     //quotes.length === 1643
 
@@ -16,10 +18,10 @@ async function corpusMaker() {
       corpus += quotes[i].text
       corpus += ' '
       if (i === quotes.length - 1) {
-        generatePoem(corpus, 3)
+        text = generatePoem(corpus, 3)
       }
     }
-    return corpus
+    return text
   } catch (error) {
     console.log(error)
   }
@@ -80,13 +82,13 @@ function writeLine(corpus, minLength) {
   return phrase.join(' ')
 }
 
-function generatePoem(corpus, lines) {
+export default function generatePoem(corpus, lines) {
+  const poem = ''
+
   for (let i = 0; i < lines; i++) {
     let l = Math.floor(Math.random() * 10) + 1
-    console.log(writeLine(corpus, l))
+    poem.concat(writeLine(corpus, l))
   }
+
+  return poem
 }
-
-const corpus = corpusMaker()
-
-console.log(corpus)

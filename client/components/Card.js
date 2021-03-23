@@ -6,43 +6,19 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Upload from './Upload'
+import {corpusMaker, generatePoem} from '../word-markov'
 
-const Card = ({createNewCard}) => {
+const Card = async ({createNewCard}) => {
   const [name, setName] = useState('')
   const [yourEmail, setYourEmail] = useState('')
   const [recipientName, setRecipientName] = useState('')
   const [recipientEmail, setRecipientEmail] = useState('')
   const [file, setFile] = useState(null)
   const [text, setText] = useState('')
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     name: '',
-  //     yourEmail: '',
-  //     recipientName: '',
-  //     recipientEmail: '',
-  //     file: null,
-  //     text: ''
-  //   }
-  //   this.handleChange = this.handleChange.bind(this)
-  //   // this.handleSubmit = this.handleSubmit.bind(this)
-  // }
-  // handleChange(evt) {
-  //   this.setState({[evt.target.name]: evt.target.value})
-  // }
-  // handleSubmit(evt) {
-  //   evt.preventDefault()
-  //   this.props.newCard({...this.state})
-  // }
-  // render() {
-  //   const {
-  //     name,
-  //     yourEmail,
-  //     recipientName,
-  //     recipientEmail,
-  //     file,
-  //     text
-  //   } = this.state
+  const [generatedText, generateText] = useState('')
+  // const corpus = await corpusMaker();
+  // console.log(corpus)
+
   return (
     <Jumbotron id="card">
       <Form
