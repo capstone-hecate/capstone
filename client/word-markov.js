@@ -8,20 +8,14 @@ export async function corpusMaker() {
       url: 'https://type.fit/api/quotes'
     })
     const quotes = results.data
-
-    let text
-
     // console.log(quotes.length)
     //quotes.length === 1643
 
     for (let i = 0; i < quotes.length; i++) {
       corpus += quotes[i].text
       corpus += ' '
-      if (i === quotes.length - 1) {
-        text = generatePoem(corpus, 3)
-      }
     }
-    return text
+    return corpus
   } catch (error) {
     console.log(error)
   }
@@ -82,13 +76,13 @@ function writeLine(corpus, minLength) {
   return phrase.join(' ')
 }
 
-export default function generatePoem(corpus, lines) {
-  const poem = ''
+export const generatePoem = (corpus, lines) => {
+  let poem = ''
 
   for (let i = 0; i < lines; i++) {
     let l = Math.floor(Math.random() * 10) + 1
-    poem.concat(writeLine(corpus, l))
+    poem += writeLine(corpus, l)
+    poem += '\n'
   }
-
   return poem
 }
