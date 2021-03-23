@@ -32,7 +32,7 @@ class FinalCard extends React.Component {
       x = 150
       y = 290
     }
-    let text = `Dear Friend,\nelses paper every man is necessary to\nend may and wisdom often miss the\nbeen always said\nLove, Friend`
+    let text = this.props.text
     ctx.font = '20px Sans Serif'
 
     img.onload = () => {
