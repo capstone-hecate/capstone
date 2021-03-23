@@ -23,6 +23,7 @@ var upload = multer({dest: 'uploads/'})
 //POST api/cards/
 router.post('/', upload.single('file'), async (req, res, next) => {
   try {
+    console.log('req.body-->', req.body)
     var imageData = fs.readFileSync(req.file.path)
     const card = await Card.create({
       name: req.body.name,
@@ -30,7 +31,8 @@ router.post('/', upload.single('file'), async (req, res, next) => {
       recipientName: req.body.recipientName,
       recipientEmail: req.body.recipientEmail,
       imageUrl: imageData,
-      text: req.body.text
+      text: req.body.text,
+      template: req.body.template
     })
     res.json(card)
   } catch (err) {

@@ -1,9 +1,7 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import {Link} from 'react-scroll'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import Card from './Card'
 
 let templates = [
   {name: 'happy-birthday', image: 'happy-birthday.jpg'},
@@ -12,18 +10,20 @@ let templates = [
 ]
 
 class ChooseTemplate extends React.Component {
-  constructor() {
-    super()
-    this.state = {template: '', clicked: false}
+  constructor(props) {
+    super(props)
+    this.state = {template: ''}
     this.onClick = this.onClick.bind(this)
   }
 
-  onClick(templateName) {
-    this.setState({template: templateName, clicked: !this.state.clicked})
+  async onClick(templateName) {
+    await this.setState({template: templateName})
     console.log(this.state)
+    this.props.selectTemplate(templateName)
   }
 
   render() {
+    console.log('props in choose template', this.props)
     return (
       <>
         <Jumbotron>
@@ -69,5 +69,12 @@ class ChooseTemplate extends React.Component {
     )
   }
 }
+
+// const mapDispatch = (dispatch) => {
+//   console.log("mapping dispatch")
+//   return {
+//   updateTemplate: (template) => dispatch(updateTemplateThunk(template))
+//   }
+// }
 
 export default ChooseTemplate

@@ -1,14 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {createNewCard} from '../store/card'
 import {connect} from 'react-redux'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import Upload from './Upload'
 import {corpusMaker, generatePoem} from '../word-markov'
 
-const Card = async ({createNewCard}) => {
+const Card = props => {
   const [name, setName] = useState('')
   const [yourEmail, setYourEmail] = useState('')
   const [recipientName, setRecipientName] = useState('')
@@ -24,6 +22,7 @@ const Card = async ({createNewCard}) => {
       <Form
         onSubmit={async evt => {
           evt.preventDefault()
+          let template = props.getTemplate()
           const fd = new FormData()
           fd.append('name', name)
           fd.append('yourEmail', yourEmail)
@@ -31,7 +30,8 @@ const Card = async ({createNewCard}) => {
           fd.append('recipientEmail', recipientEmail)
           fd.append('file', file)
           fd.append('text', text)
-          createNewCard(fd)
+          fd.append('template', template)
+          props.createNewCard(fd)
         }}
       >
         <h3 className="centered-header">Make your card!</h3>
@@ -93,7 +93,11 @@ const Card = async ({createNewCard}) => {
   )
 }
 
+const mapState = state => ({
+  template: state.template
+})
+
 const mapDispatch = dispatch => ({
   createNewCard: card => dispatch(createNewCard(card))
 })
-export default connect(null, mapDispatch)(Card)
+export default connect(mapState, mapDispatch)(Card)
