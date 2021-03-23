@@ -27,7 +27,7 @@ class Parent extends React.Component {
         <Empty />
         <Card template={this.state.template} />
         <Empty />
-        <FinalCard />
+        <FinalCard template={this.state.template} />
       </>
     )
   }
