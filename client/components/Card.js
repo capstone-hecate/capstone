@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import {corpusMaker, generatePoem} from '../word-markov'
+import {Link} from 'react-scroll'
 
 const Card = props => {
   const [name, setName] = useState('')
@@ -91,7 +92,7 @@ const Card = props => {
             value={text}
           />
           <Button
-            variant="primary"
+            variant="dark"
             disabled={generating}
             onClick={() => {
               isGenerating(true)
@@ -100,9 +101,18 @@ const Card = props => {
           >
             {generating ? 'Loading...' : 'Generate Text'}
           </Button>
-          <Button variant="dark" type="submit">
-            Make my card!
-          </Button>
+          <Link
+            activeClass="active"
+            to="final-card"
+            smooth={true}
+            spy={true}
+            offset={-70}
+            duration={500}
+          >
+            <Button variant="dark" type="submit">
+              Make my card!
+            </Button>
+          </Link>
         </Form.Group>
       </Form>
     </Jumbotron>
