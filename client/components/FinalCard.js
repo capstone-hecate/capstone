@@ -26,7 +26,7 @@ class FinalCard extends React.Component {
 
   render() {
     return (
-      <Jumbotron>
+      <Jumbotron id="final-card">
         <canvas ref={this.canvas} width="600" height="400" />
       </Jumbotron>
     )

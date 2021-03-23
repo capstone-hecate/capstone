@@ -33,21 +33,27 @@ class ChooseTemplate extends React.Component {
             width="300"
             alt="happy-birthday"
             onClick={() => this.onClick('happy-birthday')}
-            className={this.state.clicked ? 'bordered-image' : ''}
+            className={
+              this.state.template === 'happy-birthday' ? 'bordered-image' : ''
+            }
           />
           <img
             src="thank-you.jpg"
             width="300"
             alt="thank-you"
             onClick={() => this.onClick('thank-you')}
-            className={this.state.clicked ? 'bordered-image' : ''}
+            className={
+              this.state.template === 'thank-you' ? 'bordered-image' : ''
+            }
           />
           <img
             src="general.jpg"
             width="300"
             alt="general"
             onClick={() => this.onClick('general')}
-            className={this.state.clicked ? 'bordered-image' : ''}
+            className={
+              this.state.template === 'general' ? 'bordered-image' : ''
+            }
           />
 
           <div>
