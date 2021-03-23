@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
+import {corpusMaker, generatePoem} from '../word-markov'
 
 const Card = props => {
   const [name, setName] = useState('')
@@ -12,6 +13,14 @@ const Card = props => {
   const [recipientEmail, setRecipientEmail] = useState('')
   const [file, setFile] = useState(null)
   const [text, setText] = useState('')
+  const [generating, isGenerating] = useState(false)
+
+  const loadText = async () => {
+    const corpus = await corpusMaker()
+    const poem = generatePoem(await corpus, 3)
+    setText(poem)
+    isGenerating(false)
+  }
 
   return (
     <Jumbotron id="card">
@@ -79,7 +88,18 @@ const Card = props => {
             name="text"
             onChange={e => setText(e.target.value)}
             type="text"
+            value={text}
           />
+          <Button
+            variant="primary"
+            disabled={generating}
+            onClick={() => {
+              isGenerating(true)
+              loadText()
+            }}
+          >
+            {generating ? 'Loading...' : 'Generate Text'}
+          </Button>
           <Button variant="dark" type="submit">
             Make my card!
           </Button>

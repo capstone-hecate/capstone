@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-async function corpusMaker() {
+export async function corpusMaker() {
   try {
     let corpus = ''
     const results = await axios.request({
@@ -8,16 +8,12 @@ async function corpusMaker() {
       url: 'https://type.fit/api/quotes'
     })
     const quotes = results.data
-
     // console.log(quotes.length)
     //quotes.length === 1643
 
     for (let i = 0; i < quotes.length; i++) {
       corpus += quotes[i].text
       corpus += ' '
-      if (i === quotes.length - 1) {
-        generatePoem(corpus, 3)
-      }
     }
     return corpus
   } catch (error) {
@@ -80,13 +76,13 @@ function writeLine(corpus, minLength) {
   return phrase.join(' ')
 }
 
-function generatePoem(corpus, lines) {
+export const generatePoem = (corpus, lines) => {
+  let poem = ''
+
   for (let i = 0; i < lines; i++) {
     let l = Math.floor(Math.random() * 10) + 1
-    console.log(writeLine(corpus, l))
+    poem += writeLine(corpus, l)
+    poem += '\n'
   }
+  return poem
 }
-
-const corpus = corpusMaker()
-
-console.log(corpus)
