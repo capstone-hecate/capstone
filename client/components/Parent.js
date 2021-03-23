@@ -18,13 +18,14 @@ class Parent extends React.Component {
   }
 
   render() {
+    console.log(this.state, 'Parent.js state')
     return (
       <>
         <ChooseTemplate
           selectTemplate={template => this.selectTemplate(template)}
         />
         <Empty />
-        <Card getTemplate={this.getTemplate} />
+        <Card template={this.state.template} />
         <Empty />
         <FinalCard />
       </>
