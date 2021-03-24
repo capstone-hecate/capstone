@@ -13,7 +13,7 @@ class FinalCard extends React.Component {
     this.onClick = this.onClick.bind(this)
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     let canvas = this.canvas.current
     const ctx = canvas.getContext('2d')
     var img = new Image(600)
@@ -62,12 +62,6 @@ class FinalCard extends React.Component {
     }
   }
 
-  // componentDidUpdate() {
-  //   let URL = canvas.toDataURL()
-  //   if (this.state.canvasUrl.Url === '')
-  //   this.setState({canvasUrl: {Url: URL}})
-  // }
-
   onClick(e) {
     console.log(this.state.canvasUrl)
     this.props.addUrl(this.props.card.card, this.state.canvasUrl)
@@ -76,7 +70,6 @@ class FinalCard extends React.Component {
 
   render() {
     console.log('this.props.card', this.props.card)
-
     return (
       <Jumbotron id="final-card">
         <canvas ref={this.canvas} width="600" height="400" />
