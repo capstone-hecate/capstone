@@ -14,7 +14,6 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <Parent />
       <Routes />
     </div>
   )

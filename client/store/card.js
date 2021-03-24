@@ -1,10 +1,21 @@
 import axios from 'axios'
 
 const CREATE_CARD = 'CREATE_CARD'
-const UPDATE_TEMPLATE = 'UPDATE_TEMPLATE'
+const ADD_URL = 'ADD_URL'
+const SET_CARD = 'SET_CARD'
 
 export const createCard = card => ({
   type: CREATE_CARD,
+  card
+})
+
+export const _addUrl = card => ({
+  type: ADD_URL,
+  card
+})
+
+const setCard = card => ({
+  type: SET_CARD,
   card
 })
 
@@ -18,9 +29,32 @@ export const createNewCard = card => async dispatch => {
   }
 }
 
+export const addUrl = (card, cardUrl) => async dispatch => {
+  try {
+    console.log('In addUrl thunk')
+    const {data} = await axios.put(`/api/cards/${card.id}`, cardUrl)
+    dispatch(_addUrl(data))
+  } catch (error) {
+    console.log('Error sending Card URL')
+  }
+}
+
+export const fetchCard = cardId => async dispatch => {
+  try {
+    const {data} = await axios.get(`/api/cards/${cardId}`)
+    dispatch(setCard(data))
+  } catch (error) {
+    console.log('Error fetching card')
+  }
+}
+
 export default function cardReducer(state = {}, action) {
   switch (action.type) {
     case CREATE_CARD:
+      return {...state, card: action.card}
+    case ADD_URL:
+      return {...state, card: action.card}
+    case SET_CARD:
       return {...state, card: action.card}
     default:
       return state
