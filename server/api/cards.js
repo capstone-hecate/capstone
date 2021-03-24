@@ -23,7 +23,6 @@ var upload = multer({dest: 'uploads/'})
 //POST api/cards/
 router.post('/', upload.single('file'), async (req, res, next) => {
   try {
-    console.log('req.body-->', req.body)
     if (req.file) {
       var imageData = fs.readFileSync(req.file.path)
     }

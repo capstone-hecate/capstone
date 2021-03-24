@@ -12,8 +12,8 @@ class FinalCard extends React.Component {
     this.onClick = this.onClick.bind(this)
   }
 
-  componentDidUpdate() {
-    const canvas = this.canvas.current
+  componentDidMount() {
+    let canvas = this.canvas.current
     const ctx = canvas.getContext('2d')
     var img = new Image(600)
     let x, y
@@ -44,25 +44,30 @@ class FinalCard extends React.Component {
       for (var j = 0; j < lines.length; j++) {
         ctx.fillText(lines[j], x, y + j * 25)
       }
+      let URL = canvas.toDataURL()
+      this.setState({canvasUrl: {Url: URL}})
     }
     if (this.props.template === 'general') {
       let userImg = new Image(600, 270)
 
-      let blobUrl = this.props.card.imageUrl || ''
-      let blobData = blobUrl.data || []
+      // let blobUrl = this.props.card.imageUrl || ''
+      // let blobData = blobUrl.data || []
 
       userImg.onload = () => {
         ctx.drawImage(userImg, 0, 0, 600, 270)
+        let URL = canvas.toDataURL()
+        this.setState({canvasUrl: {Url: URL}})
       }
-    }
-    let URL = canvas.toDataURL()
-    if (this.state.canvasUrl.Url === '') {
-      this.setState({canvasUrl: {Url: URL}})
     }
   }
 
+  // componentDidUpdate() {
+  //   let URL = canvas.toDataURL()
+  //   if (this.state.canvasUrl.Url === '')
+  //   this.setState({canvasUrl: {Url: URL}})
+  // }
+
   onClick(e) {
-    console.log('clicked!', this.props.card.card)
     console.log(this.state.canvasUrl)
     this.props.addUrl(this.props.card.card, this.state.canvasUrl)
   }
