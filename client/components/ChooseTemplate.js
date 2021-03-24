@@ -24,7 +24,7 @@ class ChooseTemplate extends React.Component {
   render() {
     return (
       <>
-        <Jumbotron>
+        <Jumbotron id="choose-template">
           <h3 className="centered-header">Choose your template:</h3>
           <img
             src="happy-birthday.jpg"
