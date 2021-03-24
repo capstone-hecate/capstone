@@ -1,7 +1,7 @@
 import React from 'react'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import {connect} from 'react-redux'
-import {addUrl} from '../store/card'
+import {addUrl, sendEmail} from '../store/card'
 import Button from 'react-bootstrap/Button'
 
 class FinalCard extends React.Component {
@@ -70,6 +70,7 @@ class FinalCard extends React.Component {
   onClick(e) {
     console.log(this.state.canvasUrl)
     this.props.addUrl(this.props.card.card, this.state.canvasUrl)
+    this.props.sendEmail(this.props.card.card)
   }
 
   render() {
@@ -94,9 +95,9 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  console.log('mapping dispatch to props')
   return {
-    addUrl: (card, cardUrl) => dispatch(addUrl(card, cardUrl))
+    addUrl: (card, cardUrl) => dispatch(addUrl(card, cardUrl)),
+    sendEmail: (card) => dispatch(sendEmail(card))
   }
 }
 
