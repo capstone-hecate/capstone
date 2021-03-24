@@ -3,7 +3,7 @@ import axios from 'axios'
 const CREATE_CARD = 'CREATE_CARD'
 const ADD_URL = 'ADD_URL'
 const SET_CARD = 'SET_CARD'
-const SEND_EMAIL = "SEND_EMAIL"
+const SEND_EMAIL = 'SEND_EMAIL'
 
 export const createCard = card => ({
   type: CREATE_CARD,
@@ -59,7 +59,7 @@ export const sendEmail = card => async dispatch => {
     const {data} = await axios.post(`/api/emails`, card)
     // dispatch(_sendEmail(data))
   } catch (err) {
-    console.log('Cannot create new card')
+    console.log('Cannot send email')
   }
 }
 
