@@ -5,6 +5,8 @@ router.use('/users', require('./users'))
 
 router.use('/cards', require('./cards'))
 
+router.use('/emails', require('./emails'))
+
 router.use((req, res, next) => {
   const error = new Error('Not Found')
   error.status = 404
