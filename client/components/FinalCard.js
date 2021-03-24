@@ -3,6 +3,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import {connect} from 'react-redux'
 import {addUrl, sendEmail} from '../store/card'
 import Button from 'react-bootstrap/Button'
+import {Link} from 'react-scroll'
 
 class FinalCard extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class FinalCard extends React.Component {
     }
     if (this.props.template === 'happy-birthday') {
       img.src = 'happy-birthday.jpg'
-      ctx.fillStyle = '#8e77ab'
+      ctx.fillStyle = '#a45464'
       x = 30
       y = 175
     }
@@ -83,6 +84,16 @@ class FinalCard extends React.Component {
         <Button variant="dark" onClick={this.onClick}>
           Send my card!
         </Button>
+        <Link
+          activeClass="active"
+          to="card"
+          smooth={true}
+          spy={true}
+          offset={-70}
+          duration={500}
+        >
+          <Button variant="dark">Go back</Button>
+        </Link>
       </Jumbotron>
     )
   }
@@ -97,7 +108,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     addUrl: (card, cardUrl) => dispatch(addUrl(card, cardUrl)),
-    sendEmail: (card) => dispatch(sendEmail(card))
+    sendEmail: card => dispatch(sendEmail(card))
   }
 }
 

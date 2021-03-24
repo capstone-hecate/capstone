@@ -140,6 +140,16 @@ const Card = props => {
               Make my card!
             </Button>
           </Link>
+          <Link
+            activeClass="active"
+            to="choose-template"
+            smooth={true}
+            spy={true}
+            offset={-70}
+            duration={500}
+          >
+            <Button variant="dark">Go back</Button>
+          </Link>
         </Form.Group>
       </Form>
     </Jumbotron>

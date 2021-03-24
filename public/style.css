@@ -51,6 +51,7 @@ img {
 .btn {
   background-color: purple;
   border: purple;
+  margin: 10px;
 }
 
 .empty-div {
