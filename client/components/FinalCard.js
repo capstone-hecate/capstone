@@ -1,23 +1,26 @@
 import React from 'react'
 import Jumbotron from 'react-bootstrap/Jumbotron'
+import {connect} from 'react-redux'
+import {addUrl} from '../store/card'
+import Button from 'react-bootstrap/Button'
 
 class FinalCard extends React.Component {
   constructor(props) {
     super(props)
     this.canvas = React.createRef()
+    this.state = {canvasUrl: {Url: ''}}
+    this.onClick = this.onClick.bind(this)
   }
 
   componentDidUpdate() {
-    console.log('inside componentDidMount')
     const canvas = this.canvas.current
     const ctx = canvas.getContext('2d')
     var img = new Image(600)
-    let x
-    let y
+    let x, y
     if (this.props.template === 'thank-you') {
       img.src = 'thank-you.jpg'
       ctx.fillStyle = '#5f826d'
-      x = 175
+      x = 100
       y = 175
     }
     if (this.props.template === 'happy-birthday') {
@@ -29,7 +32,7 @@ class FinalCard extends React.Component {
     if (this.props.template === 'general') {
       img.src = 'general.jpg'
       ctx.fillStyle = 'black'
-      x = 150
+      x = 10
       y = 290
     }
     let text = this.props.text
@@ -44,21 +47,52 @@ class FinalCard extends React.Component {
     }
     if (this.props.template === 'general') {
       let userImg = new Image(600, 270)
-      //jpg = placeholder
-      userImg.src = 'happy-birthday.jpg'
+
+      let blobUrl = this.props.card.imageUrl || ''
+      let blobData = blobUrl.data || []
+
       userImg.onload = () => {
         ctx.drawImage(userImg, 0, 0, 600, 270)
       }
     }
+    let URL = canvas.toDataURL()
+    if (this.state.canvasUrl.Url === '') {
+      this.setState({canvasUrl: {Url: URL}})
+    }
+  }
+
+  onClick(e) {
+    console.log('clicked!', this.props.card.card)
+    console.log(this.state.canvasUrl)
+    this.props.addUrl(this.props.card.card, this.state.canvasUrl)
   }
 
   render() {
+    console.log('this.props.card', this.props.card)
+
     return (
       <Jumbotron id="final-card">
         <canvas ref={this.canvas} width="600" height="400" />
+        <br />
+        <Button variant="dark" onClick={this.onClick}>
+          Send my card!
+        </Button>
       </Jumbotron>
     )
   }
 }
 
-export default FinalCard
+const mapState = state => {
+  return {
+    card: state.card
+  }
+}
+
+const mapDispatch = dispatch => {
+  console.log('mapping dispatch to props')
+  return {
+    addUrl: (card, cardUrl) => dispatch(addUrl(card, cardUrl))
+  }
+}
+
+export default connect(mapState, mapDispatch)(FinalCard)

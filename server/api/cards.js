@@ -41,3 +41,19 @@ router.post('/', upload.single('file'), async (req, res, next) => {
     next(err)
   }
 })
+
+//PUT api/cards/:cardId
+router.put('/:cardId', async (req, res, next) => {
+  console.log('req.body', req.body)
+  try {
+    let card = await Card.findOne({
+      where: {
+        id: req.params.cardId
+      }
+    })
+    card.cardUrl = req.body.Url
+    await card.save()
+  } catch (error) {
+    next(error)
+  }
+})

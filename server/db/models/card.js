@@ -34,6 +34,9 @@ const Card = db.define('card', {
     validate: {
       notEmpty: true
     }
+  },
+  cardUrl: {
+    type: Sequelize.TEXT
   }
 })
 
