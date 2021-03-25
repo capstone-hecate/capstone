@@ -13,7 +13,7 @@ class FinalCard extends React.Component {
     this.onClick = this.onClick.bind(this)
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     let canvas = this.canvas.current
     const ctx = canvas.getContext('2d')
     var img = new Image(600)
@@ -51,8 +51,7 @@ class FinalCard extends React.Component {
     if (this.props.template === 'general') {
       let userImg = new Image(600, 270)
 
-      // let blobUrl = this.props.card.imageUrl || ''
-      // let blobData = blobUrl.data || []
+      userImg.src = localStorage.getItem('currentImage')
 
       userImg.onload = () => {
         ctx.drawImage(userImg, 0, 0, 600, 270)
@@ -69,7 +68,7 @@ class FinalCard extends React.Component {
   }
 
   render() {
-    console.log('this.props.card', this.props.card)
+    // console.log('this.props.card', this.props.card)
     return (
       <Jumbotron id="final-card">
         <canvas ref={this.canvas} width="600" height="400" />

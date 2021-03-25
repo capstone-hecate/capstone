@@ -6,156 +6,148 @@ import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import {corpusMaker, generatePoem} from '../word-markov'
 import {Link} from 'react-scroll'
+import {render} from 'enzyme'
 
-const Card = props => {
-  const [name, setName] = useState('')
-  const [yourEmail, setYourEmail] = useState('')
-  const [recipientName, setRecipientName] = useState('')
-  const [recipientEmail, setRecipientEmail] = useState('')
-  const [file, setFile] = useState(null)
-  const [text, setText] = useState('')
-  const [generating, isGenerating] = useState(false)
+class Card extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      name: '',
+      yourEmail: '',
+      recipientName: '',
+      recipientEmail: '',
+      text: '',
+      generating: false
+    }
+    this.loadText = this.loadText.bind(this)
+    this.setEditedText = this.setEditedText.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-  const loadText = async () => {
+  async loadText() {
     const corpus = await corpusMaker()
     const poem = generatePoem(corpus, 3)
-    const generatedText = `Dear ${recipientName}, \n${poem}Yours, ${name}`
-    setText(generatedText)
-    props.setGeneratedText(generatedText)
-    isGenerating(false)
+    const generatedText = `Dear ${this.state.recipientName}, \n${poem}Yours, ${
+      this.state.name
+    }`
+    this.setState({text: generatedText})
+    this.props.setGeneratedText(generatedText)
+    this.setState({generating: false})
   }
 
-  const setEditedText = text => {
-    props.setGeneratedText(text)
+  setEditedText(generatedText) {
+    this.props.setGeneratedText(generatedText)
+  }
+  handleChange = e => {
+    this.setState({[e.target.name]: e.target.value})
   }
 
-  let template = props.template
-  // console.log(props, 'Card.js Template')
+  render() {
+    return (
+      <Jumbotron id="card">
+        <Form>
+          <h3 className="centered-header">Make your card!</h3>
+          <Form.Group id="card-form">
+            <Form.Label htmlFor="name">Your name</Form.Label>
+            <Form.Control
+              placeholder="Enter your name"
+              name="name"
+              onChange={this.handleChange}
+              type="text"
+            />
+            <Form.Label htmlFor="yourEmail">Your Email</Form.Label>
+            <Form.Control
+              placeholder="Enter your email"
+              name="yourEmail"
+              onChange={this.handleChange}
+              type="text"
+            />
 
-  return (
-    <Jumbotron id="card">
-      <Form
-        onSubmit={async evt => {
-          evt.preventDefault()
-          const fd = new FormData()
-          fd.append('name', name)
-          fd.append('yourEmail', yourEmail)
-          fd.append('recipientName', recipientName)
-          fd.append('recipientEmail', recipientEmail)
-          fd.append('file', file)
-          fd.append('text', text)
-          fd.append('template', template)
-          props.createNewCard(fd)
-        }}
-      >
-        <h3 className="centered-header">Make your card!</h3>
-        <Form.Group id="card-form">
-          <Form.Label htmlFor="name">Your name</Form.Label>
-          <Form.Control
-            placeholder="Enter your name"
-            name="name"
-            onChange={e => setName(e.target.value)}
-            type="text"
-          />
-          <Form.Label htmlFor="yourEmail">Your Email</Form.Label>
-          <Form.Control
-            placeholder="Enter your email"
-            name="yourEmail"
-            onChange={e => setYourEmail(e.target.value)}
-            type="text"
-          />
+            <Form.Label htmlFor="recepientName">Recipient Name</Form.Label>
+            <Form.Control
+              placeholder="Enter recipient name"
+              name="recipientName"
+              onChange={this.handleChange}
+              type="text"
+            />
 
-          <Form.Label htmlFor="recepientName">Recipient Name</Form.Label>
-          <Form.Control
-            placeholder="Enter recipient name"
-            name="recipientName"
-            onChange={e => setRecipientName(e.target.value)}
-            type="text"
-          />
+            <Form.Label htmlFor="recepientEmail">Recipient Email</Form.Label>
+            <Form.Control
+              placeholder="Enter recipient email"
+              name="recipientEmail"
+              onChange={this.handleChange}
+              type="text"
+            />
 
-          <Form.Label htmlFor="recepientEmail">Recipient Email</Form.Label>
-          <Form.Control
-            placeholder="Enter recipient email"
-            name="recipientEmail"
-            onChange={e => setRecipientEmail(e.target.value)}
-            type="text"
-          />
+            <Form.Label>Upload your photo (optional)</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={e => {
+                const reader = new FileReader()
+                reader.readAsDataURL(e.target.files[0])
+                reader.onload = function() {
+                  localStorage.setItem('currentImage', reader.result)
+                }
+              }}
+            />
 
-          <Form.Label>Upload your photo (optional)</Form.Label>
-          <Form.Control
-            type="file"
-            onChange={e => {
-              console.log(e.target.files[0])
-              setFile(e.target.files[0])
-            }}
-          />
-
-          <Form.Label htmlFor="textBox">Content</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            name="text"
-            onChange={e => {
-              setText(e.target.value)
-              setEditedText(e.target.value)
-            }}
-            type="text"
-            value={text}
-          />
-          <Button
-            variant="dark"
-            disabled={generating}
-            onClick={() => {
-              isGenerating(true)
-              loadText()
-            }}
-          >
-            {generating ? 'Loading...' : 'Generate Text'}
-          </Button>
-          <Link
-            activeClass="active"
-            to="final-card"
-            smooth={true}
-            spy={true}
-            offset={-70}
-            duration={500}
-          >
+            <Form.Label htmlFor="textBox">Content</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              name="text"
+              onChange={e => {
+                this.handleChange(e)
+                this.setEditedText(e.target.value)
+              }}
+              type="text"
+              value={this.state.text}
+            />
             <Button
               variant="dark"
-              type="button"
-              onClick={e => {
-                e.preventDefault()
-                console.log('onClick of Card.js')
-                const fd = new FormData()
-                fd.append('name', name)
-                fd.append('yourEmail', yourEmail)
-                fd.append('recipientName', recipientName)
-                fd.append('recipientEmail', recipientEmail)
-                fd.append('file', file)
-                fd.append('text', text)
-                fd.append('template', template)
-                props.createNewCard(fd)
+              disabled={this.state.generating}
+              onClick={() => {
+                this.setState({generating: true})
+                this.loadText()
               }}
             >
-              Make my card!
+              {this.state.generating ? 'Loading...' : 'Generate Text'}
             </Button>
-          </Link>
-          <Link
-            activeClass="active"
-            to="choose-template"
-            smooth={true}
-            spy={true}
-            offset={-70}
-            duration={500}
-          >
-            <Button variant="dark">Go back</Button>
-          </Link>
-        </Form.Group>
-      </Form>
-    </Jumbotron>
-  )
+            <Link
+              activeClass="active"
+              to="final-card"
+              smooth={true}
+              spy={true}
+              offset={-70}
+              duration={500}
+            >
+              <Button
+                variant="dark"
+                type="button"
+                onClick={e => {
+                  e.preventDefault()
+                  this.props.createNewCard(this.state)
+                }}
+              >
+                Make my card!
+              </Button>
+            </Link>
+            <Link
+              activeClass="active"
+              to="choose-template"
+              smooth={true}
+              spy={true}
+              offset={-70}
+              duration={500}
+            >
+              <Button variant="dark">Go back</Button>
+            </Link>
+          </Form.Group>
+        </Form>
+      </Jumbotron>
+    )
+  }
 }
-
 // const mapState = state => ({
 //   template: state.template
 // })
