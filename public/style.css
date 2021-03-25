@@ -31,6 +31,10 @@ img {
   border-radius: 10%;
 }
 
+canvas {
+  border-radius: 10%;
+}
+
 .bordered-image {
   border: 5px solid purple;
 }

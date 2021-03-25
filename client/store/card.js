@@ -3,7 +3,6 @@ import axios from 'axios'
 const CREATE_CARD = 'CREATE_CARD'
 const ADD_URL = 'ADD_URL'
 const SET_CARD = 'SET_CARD'
-const SEND_EMAIL = 'SEND_EMAIL'
 
 export const createCard = card => ({
   type: CREATE_CARD,
@@ -20,15 +19,12 @@ const setCard = card => ({
   card
 })
 
-// const _sendEmail = card => ({
-//   type: SEND_EMAIL,
-//   card
-// })
-
 export const createNewCard = card => async dispatch => {
   try {
-    console.log('In the thuuunnkkk', card)
+    //dispatch comes first so that the card data is sent on time for FinalCard component to mount & render text
+    dispatch(createCard(card))
     const {data} = await axios.post('/api/cards/', card)
+    //dispatch happens a second time so that we have access to the cardId, for the addUrl thunk
     dispatch(createCard(data))
   } catch (err) {
     console.log('Cannot create new card')
@@ -56,8 +52,7 @@ export const fetchCard = cardId => async dispatch => {
 
 export const sendEmail = card => async dispatch => {
   try {
-    const {data} = await axios.post(`/api/emails`, card)
-    // dispatch(_sendEmail(data))
+    await axios.post(`/api/emails`, card)
   } catch (err) {
     console.log('Cannot send email')
   }

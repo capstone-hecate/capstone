@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {addUrl, sendEmail} from '../store/card'
 import Button from 'react-bootstrap/Button'
 import {Link} from 'react-scroll'
+import history from '../history'
 
 class FinalCard extends React.Component {
   constructor(props) {
@@ -18,25 +19,28 @@ class FinalCard extends React.Component {
     const ctx = canvas.getContext('2d')
     var img = new Image(600)
     let x, y
-    if (this.props.template === 'thank-you') {
+    if (this.props.template.template === 'thank-you') {
       img.src = 'thank-you.jpg'
       ctx.fillStyle = '#5f826d'
       x = 100
       y = 175
     }
-    if (this.props.template === 'happy-birthday') {
+    if (this.props.template.template === 'happy-birthday') {
       img.src = 'happy-birthday.jpg'
       ctx.fillStyle = '#a45464'
       x = 30
       y = 175
     }
-    if (this.props.template === 'general') {
+    if (this.props.template.template === 'general') {
       img.src = 'general.jpg'
       ctx.fillStyle = 'black'
-      x = 10
+      x = 25
       y = 290
     }
-    let text = this.props.text
+
+    let cardContainer = this.props.card || {}
+    let card = cardContainer.card || {}
+    let text = card.text || ''
     ctx.font = '20px Sans Serif'
 
     img.onload = () => {
@@ -48,7 +52,7 @@ class FinalCard extends React.Component {
       let URL = canvas.toDataURL()
       this.setState({canvasUrl: {Url: URL}})
     }
-    if (this.props.template === 'general') {
+    if (this.props.template.template === 'general') {
       let userImg = new Image(600, 270)
 
       userImg.src = localStorage.getItem('currentImage')
@@ -63,12 +67,13 @@ class FinalCard extends React.Component {
 
   onClick(e) {
     console.log(this.state.canvasUrl)
+
     this.props.addUrl(this.props.card.card, this.state.canvasUrl)
     this.props.sendEmail(this.props.card.card)
   }
 
   render() {
-    // console.log('this.props.card', this.props.card)
+    console.log('this.props', this.props)
     return (
       <Jumbotron id="final-card">
         <canvas ref={this.canvas} width="600" height="400" />
@@ -76,16 +81,14 @@ class FinalCard extends React.Component {
         <Button variant="dark" onClick={this.onClick}>
           Send my card!
         </Button>
-        <Link
-          activeClass="active"
-          to="card"
-          smooth={true}
-          spy={true}
-          offset={-70}
-          duration={500}
+        <Button
+          variant="dark"
+          onClick={() => {
+            history.push('/')
+          }}
         >
-          <Button variant="dark">Go back</Button>
-        </Link>
+          Start over
+        </Button>
       </Jumbotron>
     )
   }
@@ -93,7 +96,8 @@ class FinalCard extends React.Component {
 
 const mapState = state => {
   return {
-    card: state.card
+    card: state.card,
+    template: state.template
   }
 }
 

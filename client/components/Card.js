@@ -7,6 +7,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import {corpusMaker, generatePoem} from '../word-markov'
 import {Link} from 'react-scroll'
 import {render} from 'enzyme'
+import history from '../history'
 
 class Card extends React.Component {
   constructor() {
@@ -45,7 +46,13 @@ class Card extends React.Component {
   render() {
     return (
       <Jumbotron id="card">
-        <Form>
+        <Form
+          onSubmit={e => {
+            e.preventDefault()
+            this.props.createNewCard(this.state)
+            history.push('/final-card')
+          }}
+        >
           <h3 className="centered-header">Make your card!</h3>
           <Form.Group id="card-form">
             <Form.Label htmlFor="name">Your name</Form.Label>
@@ -113,25 +120,11 @@ class Card extends React.Component {
             >
               {this.state.generating ? 'Loading...' : 'Generate Text'}
             </Button>
-            <Link
-              activeClass="active"
-              to="final-card"
-              smooth={true}
-              spy={true}
-              offset={-70}
-              duration={500}
-            >
-              <Button
-                variant="dark"
-                type="button"
-                onClick={e => {
-                  e.preventDefault()
-                  this.props.createNewCard(this.state)
-                }}
-              >
-                Make my card!
-              </Button>
-            </Link>
+
+            <Button variant="dark" type="submit">
+              Make my card!
+            </Button>
+
             <Link
               activeClass="active"
               to="choose-template"
@@ -148,11 +141,10 @@ class Card extends React.Component {
     )
   }
 }
-// const mapState = state => ({
-//   template: state.template
-// })
 
-const mapDispatch = dispatch => ({
-  createNewCard: card => dispatch(createNewCard(card))
-})
+const mapDispatch = dispatch => {
+  return {
+    createNewCard: card => dispatch(createNewCard(card))
+  }
+}
 export default connect(null, mapDispatch)(Card)
