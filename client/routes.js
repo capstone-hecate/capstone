@@ -8,7 +8,8 @@ import {
   UserHome,
   ChooseTemplate,
   CardView,
-  Parent
+  Parent,
+  FinalCard
 } from './components'
 import {me} from './store'
 import Card from './components/Card'
@@ -32,6 +33,7 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/card" component={Card} />
         <Route path="/choose-template" component={ChooseTemplate} />
+        <Route path="/final-card" component={FinalCard} />
         <Route path="/cards/:cardId" component={CardView} />
         {isLoggedIn && (
           <Switch>

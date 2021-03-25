@@ -29,11 +29,6 @@ class Parent extends React.Component {
           template={this.state.template}
           setGeneratedText={text => this.setGeneratedText(text)}
         />
-        <Empty />
-        {this.state.template &&
-          this.state.text && (
-            <FinalCard template={this.state.template} text={this.state.text} />
-          )}
       </>
     )
   }

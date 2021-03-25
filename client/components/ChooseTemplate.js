@@ -2,6 +2,8 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import {Link} from 'react-scroll'
 import Jumbotron from 'react-bootstrap/Jumbotron'
+import {setTemplate} from '../store/template'
+import {connect} from 'react-redux'
 
 let templates = [
   {name: 'happy-birthday', image: 'happy-birthday.jpg'},
@@ -18,6 +20,7 @@ class ChooseTemplate extends React.Component {
 
   onClick(templateName) {
     this.setState({template: templateName})
+    this.props.setTemplate(templateName)
     this.props.selectTemplate(templateName)
   }
 
@@ -74,11 +77,10 @@ class ChooseTemplate extends React.Component {
   }
 }
 
-// const mapDispatch = (dispatch) => {
-//   console.log("mapping dispatch")
-//   return {
-//   updateTemplate: (template) => dispatch(updateTemplateThunk(template))
-//   }
-// }
+const mapDispatch = dispatch => {
+  return {
+    setTemplate: template => dispatch(setTemplate(template))
+  }
+}
 
-export default ChooseTemplate
+export default connect(null, mapDispatch)(ChooseTemplate)
