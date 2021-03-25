@@ -7,7 +7,9 @@ import Navbar from 'react-bootstrap/Navbar'
 
 const NavBar = ({handleClick, isLoggedIn}) => (
   <Navbar bg="light" expand="lg" sticky="top">
-    <h2>eGreetr</h2>
+    <Link to="/home">
+      <h2>eGreetr</h2>
+    </Link>
 
     <Navbar.Text className="justify-content-end">
       {isLoggedIn ? (
