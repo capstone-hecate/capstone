@@ -1,6 +1,9 @@
 import React from 'react'
 import {fetchCard} from '../store/card'
 import {connect} from 'react-redux'
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import {Link} from 'react-router-dom'
 
 class CardView extends React.Component {
   componentDidMount() {
@@ -11,7 +14,17 @@ class CardView extends React.Component {
     console.log('this.props.card', this.props.card)
     let card = this.props.card.card || {}
     let image = card.cardUrl
-    return <img src={image} />
+    return (
+      <Container id="card-view">
+        <img src={image} />
+        <br />
+        <Link to="/home">
+          <Button variant="dark" type="button" id="card-view-button">
+            Make your own card!
+          </Button>
+        </Link>
+      </Container>
+    )
   }
 }
 
