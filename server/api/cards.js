@@ -1,7 +1,5 @@
 const router = require('express').Router()
 const {Card} = require('../db/models')
-const multer = require('multer')
-const fs = require('fs')
 module.exports = router
 
 //GET /api/cards/:cardId
@@ -18,20 +16,15 @@ router.get('/:cardId', async (req, res, next) => {
   }
 })
 
-var upload = multer({dest: 'uploads/'})
-
 //POST api/cards/
-router.post('/', upload.single('file'), async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
-    if (req.file) {
-      var imageData = fs.readFileSync(req.file.path)
-    }
+    console.log('req.body --------->', req.body)
     const card = await Card.create({
       name: req.body.name,
       yourEmail: req.body.yourEmail,
       recipientName: req.body.recipientName,
       recipientEmail: req.body.recipientEmail,
-      imageUrl: imageData,
       text: req.body.text,
       template: req.body.template
     })
