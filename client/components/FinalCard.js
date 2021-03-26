@@ -20,7 +20,7 @@ class FinalCard extends React.Component {
     let x, y
 
     let templates = {
-      thankYou: {imgSrc: 'thankyou.jpg', fontColor: '#5f826d', x: 100, y: 175},
+      thankYou: {imgSrc: 'thank-you.jpg', fontColor: '#5f826d', x: 100, y: 175},
       happyBirthday: {
         imgSrc: 'happy-birthday.jpg',
         fontColor: '#a45464',
