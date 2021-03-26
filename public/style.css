@@ -83,3 +83,8 @@ canvas {
 a:hover {
   text-decoration: none;
 }
+
+.user-cards {
+  display: flex;
+  flex-wrap: wrap;
+}

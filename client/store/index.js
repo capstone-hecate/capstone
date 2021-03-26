@@ -5,11 +5,13 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import card from './card'
 import template from './template'
+import userCards from './userCards'
 
 const reducer = combineReducers({
   card,
   user,
-  template
+  template,
+  userCards
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

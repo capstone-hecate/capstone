@@ -10,8 +10,10 @@ import {
   CardView,
   Parent,
   FinalCard,
-  ConfirmationPage
+  ConfirmationPage,
+  UserCards
 } from './components'
+
 import {me} from './store'
 import Card from './components/Card'
 
@@ -41,6 +43,8 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/userhome" component={UserHome} />
+            <Route exact path="/user/cards" component={UserCards} />
+            <Route path='/' component={Parent} />
           </Switch>
         )}
         <Route component={Parent} />
