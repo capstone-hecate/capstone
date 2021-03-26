@@ -19,8 +19,19 @@ router.get('/:cardId', async (req, res, next) => {
 //POST api/cards/
 router.post('/', async (req, res, next) => {
   try {
-    console.log('req.body --------->', req.body)
-    const card = await Card.create({
+    let card
+    if (req.user) {
+      card = await Card.create({
+        name: req.body.name,
+        yourEmail: req.body.yourEmail,
+        recipientName: req.body.recipientName,
+        recipientEmail: req.body.recipientEmail,
+        text: req.body.text,
+        template: req.body.template,
+        creatorId: req.user.id
+      })
+    }
+    card = await Card.create({
       name: req.body.name,
       yourEmail: req.body.yourEmail,
       recipientName: req.body.recipientName,

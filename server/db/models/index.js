@@ -2,11 +2,11 @@ const User = require('./user')
 const Card = require('./card')
 
 //User has a one-to-many association with Card
-User.hasMany(Card, {foreignKey: 'creatorId'})
-Card.belongsTo(User)
+User.hasMany(Card)
+Card.belongsTo(User, {as: 'creator'})
 
-Card.hasMany(User, {foreignKey: 'recipientId'})
-User.belongsTo(Card)
+User.hasMany(Card)
+Card.belongsTo(User, {as: 'receiver'})
 
 module.exports = {
   User,
