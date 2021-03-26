@@ -19,15 +19,27 @@ router.get('/:cardId', async (req, res, next) => {
 //POST api/cards/
 router.post('/', async (req, res, next) => {
   try {
-    console.log('req.body --------->', req.body)
-    const card = await Card.create({
-      name: req.body.name,
-      yourEmail: req.body.yourEmail,
-      recipientName: req.body.recipientName,
-      recipientEmail: req.body.recipientEmail,
-      text: req.body.text,
-      template: req.body.template
-    })
+    let card
+    if (req.user) {
+      card = await Card.create({
+        name: req.body.name,
+        yourEmail: req.body.yourEmail,
+        recipientName: req.body.recipientName,
+        recipientEmail: req.body.recipientEmail,
+        text: req.body.text,
+        template: req.body.template,
+        userId: req.user.id
+      })
+    } else {
+      card = await Card.create({
+        name: req.body.name,
+        yourEmail: req.body.yourEmail,
+        recipientName: req.body.recipientName,
+        recipientEmail: req.body.recipientEmail,
+        text: req.body.text,
+        template: req.body.template
+      })
+    }
     res.json(card)
   } catch (err) {
     next(err)

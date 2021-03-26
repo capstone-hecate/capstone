@@ -15,9 +15,6 @@ const Card = db.define('card', {
       notEmpty: true
     }
   },
-  // template: {
-  //   type: Sequelize.ENUM('happy-birthday', 'thank-you', 'general')
-  // },
   recipientName: {
     type: Sequelize.STRING,
     allowNull: false,
