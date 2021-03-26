@@ -101,7 +101,7 @@ class Card extends React.Component {
             </>
             }
 
-            <Form.Label htmlFor="textBox"></Form.Label>
+            <Form.Label htmlFor="textBox">Content</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
