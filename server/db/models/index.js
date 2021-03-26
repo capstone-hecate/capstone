@@ -3,7 +3,7 @@ const Card = require('./card')
 
 //User has a one-to-many association with Card
 User.hasMany(Card)
-Card.belongsTo(User, {as: 'creator'})
+Card.belongsTo(User)
 
 User.hasMany(Card)
 Card.belongsTo(User, {as: 'receiver'})

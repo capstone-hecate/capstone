@@ -28,7 +28,7 @@ router.post('/', async (req, res, next) => {
         recipientEmail: req.body.recipientEmail,
         text: req.body.text,
         template: req.body.template,
-        creatorId: req.user.id
+        userId: req.user.id
       })
     } else {
       card = await Card.create({
