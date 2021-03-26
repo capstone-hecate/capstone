@@ -28,7 +28,8 @@ class ChooseTemplate extends React.Component {
     return (
       <>
         <Jumbotron id="choose-template">
-          <h3 className="centered-header">Choose your template:</h3>
+          <p className='centered-header'>eGreetr's automatic text generator writes your cards for you.</p>
+          <h3 className="centered-header">Get started: choose your template!</h3>
           <img
             src="happy-birthday.jpg"
             width="300"

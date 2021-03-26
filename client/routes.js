@@ -9,7 +9,8 @@ import {
   ChooseTemplate,
   CardView,
   Parent,
-  FinalCard
+  FinalCard,
+  ConfirmationPage
 } from './components'
 import {me} from './store'
 import Card from './components/Card'
@@ -35,6 +36,7 @@ class Routes extends Component {
         <Route path="/choose-template" component={ChooseTemplate} />
         <Route path="/final-card" component={FinalCard} />
         <Route path="/cards/:cardId" component={CardView} />
+        <Route path='/confirmation' component={ConfirmationPage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

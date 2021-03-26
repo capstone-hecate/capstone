@@ -85,20 +85,23 @@ class Card extends React.Component {
               onChange={this.handleChange}
               type="text"
             />
+            {this.props.template ==='general' &&
+            <>
+              <Form.Label>Upload your photo (optional)</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={e => {
+                  const reader = new FileReader()
+                  reader.readAsDataURL(e.target.files[0])
+                  reader.onload = function() {
+                    localStorage.setItem('currentImage', reader.result)
+                  }
+                }}
+              />
+            </>
+            }
 
-            <Form.Label>Upload your photo (optional)</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={e => {
-                const reader = new FileReader()
-                reader.readAsDataURL(e.target.files[0])
-                reader.onload = function() {
-                  localStorage.setItem('currentImage', reader.result)
-                }
-              }}
-            />
-
-            <Form.Label htmlFor="textBox">Content</Form.Label>
+            <Form.Label htmlFor="textBox"></Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
@@ -110,6 +113,10 @@ class Card extends React.Component {
               type="text"
               value={this.state.text}
             />
+            <Form.Text className="text-muted">
+              Click the button to generate text.  Feel free to edit the text, or click again for new text.
+            </Form.Text>
+
             <Button
               variant="dark"
               disabled={this.state.generating}
