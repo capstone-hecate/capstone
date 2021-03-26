@@ -28,24 +28,28 @@ class ChooseTemplate extends React.Component {
     return (
       <>
         <Jumbotron id="choose-template">
-          <p className='centered-header'>eGreetr's automatic text generator writes your cards for you.</p>
-          <h3 className="centered-header">Get started: choose your template!</h3>
+          <p className="centered-header">
+            eGreetr's automatic text generator writes your cards for you.
+          </p>
+          <h3 className="centered-header">
+            Get started: choose your template!
+          </h3>
           <img
             src="happy-birthday.jpg"
             width="300"
             alt="happy-birthday"
-            onClick={() => this.onClick('happy-birthday')}
+            onClick={() => this.onClick('happyBirthday')}
             className={
-              this.state.template === 'happy-birthday' ? 'bordered-image' : ''
+              this.state.template === 'happyBirthday' ? 'bordered-image' : ''
             }
           />
           <img
             src="thank-you.jpg"
             width="300"
             alt="thank-you"
-            onClick={() => this.onClick('thank-you')}
+            onClick={() => this.onClick('thankYou')}
             className={
-              this.state.template === 'thank-you' ? 'bordered-image' : ''
+              this.state.template === 'thankYou' ? 'bordered-image' : ''
             }
           />
           <img
@@ -55,6 +59,34 @@ class ChooseTemplate extends React.Component {
             onClick={() => this.onClick('general')}
             className={
               this.state.template === 'general' ? 'bordered-image' : ''
+            }
+          />
+
+          <img
+            src="floral.jpg"
+            width="300"
+            alt="floral"
+            onClick={() => this.onClick('floral')}
+            className={this.state.template === 'floral' ? 'bordered-image' : ''}
+          />
+
+          <img
+            src="congrats.jpg"
+            width="300"
+            alt="congrats"
+            onClick={() => this.onClick('congrats')}
+            className={
+              this.state.template === 'congrats' ? 'bordered-image' : ''
+            }
+          />
+
+          <img
+            src="get-well.jpg"
+            width="300"
+            alt="get-well"
+            onClick={() => this.onClick('getWell')}
+            className={
+              this.state.template === 'getWell' ? 'bordered-image' : ''
             }
           />
 

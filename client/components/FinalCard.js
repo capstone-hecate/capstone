@@ -18,24 +18,66 @@ class FinalCard extends React.Component {
     const ctx = canvas.getContext('2d')
     var img = new Image(600)
     let x, y
-    if (this.props.template.template === 'thank-you') {
-      img.src = 'thank-you.jpg'
-      ctx.fillStyle = '#5f826d'
-      x = 100
-      y = 175
+
+    let templates = {
+      thankYou: {imgSrc: 'thankyou.jpg', fontColor: '#5f826d', x: 100, y: 175},
+      happyBirthday: {
+        imgSrc: 'happy-birthday.jpg',
+        fontColor: '#a45464',
+        x: 30,
+        y: 175
+      },
+      general: {imgSrc: 'general.jpg', fontColor: 'black', x: 25, y: 290},
+      floral: {imgSrc: 'floral.jpg', fontColor: 'white', x: 35, y: 150},
+      congrats: {imgSrc: 'congrats.jpg', fontColor: 'white', x: 75, y: 250},
+      getWell: {imgSrc: 'get-well.jpg', fontColor: '#1a432c', x: 75, y: 250}
     }
-    if (this.props.template.template === 'happy-birthday') {
-      img.src = 'happy-birthday.jpg'
-      ctx.fillStyle = '#a45464'
-      x = 30
-      y = 175
-    }
-    if (this.props.template.template === 'general') {
-      img.src = 'general.jpg'
-      ctx.fillStyle = 'black'
-      x = 25
-      y = 290
-    }
+
+    img.src = templates[this.props.template.template].imgSrc
+    ctx.fillStyle = templates[this.props.template.template].fontColor
+    x = templates[this.props.template.template].x
+    y = templates[this.props.template.template].y
+
+    // switch(this.props.template.template) {
+    //   case 'thank-you' :
+    //     img.src = 'thank-you.jpg'
+    //     ctx.fillStyle = '#5f826d'
+    //     x = 100
+    //     y = 175
+    //     break;
+    //   case 'happy-birthday' :
+    //     img.src = 'happy-birthday.jpg'
+    //     ctx.fillStyle = '#a45464'
+    //     x = 30
+    //     y = 175
+    //     break;
+    //   case 'general' :
+    //     img.src = 'general.jpg'
+    //     ctx.fillStyle = 'black'
+    //     x = 25
+    //     y = 290
+    //     break;
+    //   case 'floral' :
+    //     img.src = 'floral.jpg'
+    //     ctx.fillStyle = 'white'
+    //     x = 35
+    //     y = 150
+    //     break;
+    //   case 'congrats' :
+    //     img.src = 'congrats.jpg'
+    //     ctx.fillStyle = 'white'
+    //     x = 75
+    //     y = 250
+    //     break;
+    //   case 'get-well' :
+    //     img.src = 'get-well.jpg'
+    //     ctx.fillStyle = '#1a432c'
+    //     x = 75
+    //     y = 250
+    //     break;
+    //   default:
+    //     break;
+    // }
 
     let cardContainer = this.props.card || {}
     let card = cardContainer.card || {}
