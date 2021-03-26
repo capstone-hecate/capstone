@@ -30,15 +30,16 @@ router.post('/', async (req, res, next) => {
         template: req.body.template,
         creatorId: req.user.id
       })
+    } else {
+      card = await Card.create({
+        name: req.body.name,
+        yourEmail: req.body.yourEmail,
+        recipientName: req.body.recipientName,
+        recipientEmail: req.body.recipientEmail,
+        text: req.body.text,
+        template: req.body.template
+      })
     }
-    card = await Card.create({
-      name: req.body.name,
-      yourEmail: req.body.yourEmail,
-      recipientName: req.body.recipientName,
-      recipientEmail: req.body.recipientEmail,
-      text: req.body.text,
-      template: req.body.template
-    })
     res.json(card)
   } catch (err) {
     next(err)
