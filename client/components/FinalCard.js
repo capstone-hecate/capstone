@@ -3,7 +3,6 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import {connect} from 'react-redux'
 import {addUrl, sendEmail} from '../store/card'
 import Button from 'react-bootstrap/Button'
-import {Link} from 'react-scroll'
 import history from '../history'
 
 class FinalCard extends React.Component {
@@ -66,14 +65,12 @@ class FinalCard extends React.Component {
   }
 
   onClick(e) {
-    console.log(this.state.canvasUrl)
-
     this.props.addUrl(this.props.card.card, this.state.canvasUrl)
     this.props.sendEmail(this.props.card.card)
+    history.push('/confirmation')
   }
 
   render() {
-    console.log('this.props', this.props)
     return (
       <Jumbotron id="final-card">
         <canvas ref={this.canvas} width="600" height="400" />

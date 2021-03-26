@@ -8,10 +8,10 @@ import Navbar from 'react-bootstrap/Navbar'
 const NavBar = ({handleClick, isLoggedIn}) => (
   <Navbar bg="light" expand="lg" sticky="top">
     <Link to="/home">
-      <h2>eGreetr</h2>
+      <h2 id="logo">eGreetr</h2>
     </Link>
 
-    <Navbar.Text className="justify-content-end">
+    <Navbar.Text className="ml-auto">
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
