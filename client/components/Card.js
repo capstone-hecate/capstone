@@ -18,8 +18,11 @@ class Card extends React.Component {
       recipientName: '',
       recipientEmail: '',
       text: '',
-      generating: false
+      generating: false,
+      validated: false,
+      setValidated: false
     }
+
     this.loadText = this.loadText.bind(this)
     this.setEditedText = this.setEditedText.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -47,44 +50,72 @@ class Card extends React.Component {
     return (
       <Jumbotron id="card">
         <Form
+          noValidate
+          validated={this.state.validated}
           onSubmit={e => {
-            e.preventDefault()
-            this.props.createNewCard(this.state)
-            history.push('/final-card')
+            const form = e.currentTarget
+            if (form.checkValidity() === false) {
+              e.preventDefault()
+              e.stopPropagation()
+            }
+
+            this.setState({validated: true})
+            if (form.checkValidity() === true) {
+              e.preventDefault()
+              this.props.createNewCard(this.state)
+              history.push('/final-card')
+            }
           }}
         >
           <h3 className="centered-header">Make your card!</h3>
           <Form.Group id="card-form">
             <Form.Label htmlFor="name">Your name</Form.Label>
             <Form.Control
+              required
               placeholder="Enter your name"
               name="name"
               onChange={this.handleChange}
               type="text"
             />
+            <Form.Control.Feedback type="invalid">
+              Please enter your name.
+            </Form.Control.Feedback>
             <Form.Label htmlFor="yourEmail">Your Email</Form.Label>
             <Form.Control
+              required
               placeholder="Enter your email"
               name="yourEmail"
               onChange={this.handleChange}
               type="text"
             />
+            <Form.Control.Feedback type="invalid">
+              Please enter your email.
+            </Form.Control.Feedback>
 
             <Form.Label htmlFor="recepientName">Recipient Name</Form.Label>
             <Form.Control
+              required
               placeholder="Enter recipient name"
               name="recipientName"
               onChange={this.handleChange}
               type="text"
             />
+            <Form.Control.Feedback type="invalid">
+              Please enter recipient name.
+            </Form.Control.Feedback>
 
             <Form.Label htmlFor="recepientEmail">Recipient Email</Form.Label>
             <Form.Control
+              required
               placeholder="Enter recipient email"
               name="recipientEmail"
               onChange={this.handleChange}
               type="text"
             />
+            <Form.Control.Feedback type="invalid">
+              Please enter recipient email.
+            </Form.Control.Feedback>
+
             {this.props.template === 'general' && (
               <>
                 <Form.Label>Upload your photo</Form.Label>
@@ -104,8 +135,9 @@ class Card extends React.Component {
               </>
             )}
 
-            <Form.Label htmlFor="textBox">Content</Form.Label>
+            <Form.Label htmlFor="textBox">Message</Form.Label>
             <Form.Control
+              required
               as="textarea"
               rows={3}
               name="text"
@@ -116,6 +148,9 @@ class Card extends React.Component {
               type="text"
               value={this.state.text}
             />
+            <Form.Control.Feedback type="invalid">
+              Please enter your message or click "Generate message" button.
+            </Form.Control.Feedback>
             <Form.Text className="text-muted">
               Click the button to generate text. Feel free to edit the text, or
               click again for new text.
