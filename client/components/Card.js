@@ -85,21 +85,24 @@ class Card extends React.Component {
               onChange={this.handleChange}
               type="text"
             />
-            {this.props.template ==='general' &&
-            <>
-              <Form.Label>Upload your photo (optional)</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={e => {
-                  const reader = new FileReader()
-                  reader.readAsDataURL(e.target.files[0])
-                  reader.onload = function() {
-                    localStorage.setItem('currentImage', reader.result)
-                  }
-                }}
-              />
-            </>
-            }
+            {this.props.template === 'general' && (
+              <>
+                <Form.Label>Upload your photo</Form.Label>
+                <Form.Control
+                  type="file"
+                  onChange={e => {
+                    const reader = new FileReader()
+                    reader.readAsDataURL(e.target.files[0])
+                    reader.onload = function() {
+                      localStorage.setItem('currentImage', reader.result)
+                    }
+                  }}
+                />
+                <Form.Text className="text-muted">
+                  Must be .jpeg or .png
+                </Form.Text>
+              </>
+            )}
 
             <Form.Label htmlFor="textBox">Content</Form.Label>
             <Form.Control
@@ -114,7 +117,8 @@ class Card extends React.Component {
               value={this.state.text}
             />
             <Form.Text className="text-muted">
-              Click the button to generate text.  Feel free to edit the text, or click again for new text.
+              Click the button to generate text. Feel free to edit the text, or
+              click again for new text.
             </Form.Text>
 
             <Button
@@ -125,7 +129,7 @@ class Card extends React.Component {
                 this.loadText()
               }}
             >
-              {this.state.generating ? 'Loading...' : 'Generate Text'}
+              {this.state.generating ? 'Loading...' : 'Generate message'}
             </Button>
 
             <Button variant="dark" type="submit">
