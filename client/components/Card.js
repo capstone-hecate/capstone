@@ -139,7 +139,7 @@ class Card extends React.Component {
             <Form.Control
               required
               as="textarea"
-              rows={3}
+              rows={6}
               name="text"
               onChange={e => {
                 this.handleChange(e)
