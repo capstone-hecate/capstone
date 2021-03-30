@@ -12,7 +12,8 @@ Front-end:
 
 * React
 * Redux
-* Boostrap
+* React-Bootstrap
+* React-Motion
 * React-scroll
 
 Back-end:
