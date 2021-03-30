@@ -87,7 +87,6 @@ class FinalCard extends React.Component {
               <canvas ref={this.canvas} width="600" height='434.11' />
               <div
                 onMouseDown={this.handleMouseDown}
-                onTouchStart={this.handleTouchStart}
                 className="envelope" style={{
                 WebkitTransform: `translate3d(${x}px, 0, 0)`,
                 transform: `translate3d(${x}px, 0, 0)`,

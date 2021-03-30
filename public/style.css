@@ -38,6 +38,12 @@ canvas {
   height: 434.11px;
 }
 
+.card-view {
+  position: absolute;
+  width: 600px;
+  height: 434.11px;
+}
+
 .bordered-image {
   border: 5px solid purple;
 }
