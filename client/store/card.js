@@ -50,6 +50,9 @@ export const fetchCard = cardId => async dispatch => {
   }
 }
 
+// should this dispatch something on success?
+// option 1: move to react
+// option 2: add in dispatch for success vs. failure case
 export const sendEmail = card => async dispatch => {
   try {
     await axios.post(`/api/emails`, card)

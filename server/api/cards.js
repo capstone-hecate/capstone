@@ -16,6 +16,10 @@ router.get('/:cardId', async (req, res, next) => {
   }
 })
 
+// how could we refactor to make this cleaner?
+// create a newCard object with all the fields except userId
+// If statement will add the userId if applicable (no need for else)
+// next line is Card.create(newCard)
 //POST api/cards/
 router.post('/', async (req, res, next) => {
   try {

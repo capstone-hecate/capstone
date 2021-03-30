@@ -28,6 +28,7 @@ router.post('/', (req, res, next) => {
   }
 
   transporter.sendMail(mail, (err, data) => {
+    // could add a status code to the fail response
     if (err) {
       res.json({
         status: 'fail'

@@ -1,3 +1,5 @@
+<!-- Great readme! I'd suggest adding instructions for how to run locally too. -->
+
 # eGreetr
 
 _a quirky, fun eCard maker_
@@ -12,7 +14,7 @@ Front-end:
 
 * React
 * Redux
-* Boostrap
+* Bootstrap
 * React-scroll
 
 Back-end:

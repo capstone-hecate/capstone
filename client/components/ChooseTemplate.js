@@ -5,6 +5,8 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import {setTemplate} from '../store/template'
 import {connect} from 'react-redux'
 
+// looks like we can remove this now
+// potentially refactor so you map
 let templates = [
   {name: 'happy-birthday', image: 'happy-birthday.jpg'},
   {name: 'thank-you', image: 'thank-you.jpg'},

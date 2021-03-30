@@ -20,6 +20,7 @@ class FinalCard extends React.Component {
     this.setState({open: !this.state.open});
   };
 
+  // is there any way to break up this function?
   componentDidMount() {
     let canvas = this.canvas.current
     const ctx = canvas.getContext('2d')
@@ -52,11 +53,11 @@ class FinalCard extends React.Component {
 
     img.onload = () => {
       ctx.drawImage(img, 0, 0, 600, 434.11)
-      var lines = text.split('\n')
-      for (var j = 0; j < lines.length; j++) {
+      var lines = text.split('\n') // replace with const
+      for (var j = 0; j < lines.length; j++) { // replace with let
         ctx.fillText(lines[j], x, y + j * 25)
       }
-      let URL = canvas.toDataURL()
+      let URL = canvas.toDataURL() 
       this.setState({canvasUrl: {Url: URL}})
     }
     if (this.props.template.template === 'general') {
