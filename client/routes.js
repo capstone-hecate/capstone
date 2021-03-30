@@ -11,7 +11,8 @@ import {
   Parent,
   FinalCard,
   ConfirmationPage,
-  UserCards
+  UserCards,
+  FinalCardAnimation
 } from './components'
 
 import {me} from './store'
@@ -39,6 +40,7 @@ class Routes extends Component {
         <Route path="/final-card" component={FinalCard} />
         <Route path="/cards/:cardId" component={CardView} />
         <Route path='/confirmation' component={ConfirmationPage} />
+        <Route path='/test' component={FinalCardAnimation} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

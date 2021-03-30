@@ -4,22 +4,46 @@ import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import {Link} from 'react-router-dom'
+import {Motion, spring} from 'react-motion';
+
 
 class CardView extends React.Component {
+  constructor() {
+    super()
+    this.state = {open: false}
+    this.handleMouseDown = this.handleMouseDown.bind(this)
+  }
   componentDidMount() {
     this.props.fetchCard(this.props.match.params.cardId)
   }
 
+  handleMouseDown = () => {
+    this.setState({open: !this.state.open});
+  };
+
   render() {
-    console.log('this.props.card', this.props.card)
     let card = this.props.card.card || {}
     let image = card.cardUrl
     return (
       <Container id="card-view">
-        <img src={image} />
+        <Motion style={{x: spring(this.state.open ? -650 : 0)}}>
+          {({x}) =>
+            <>
+              <img className='card-view' src={image} />
+              <div
+                onMouseDown={this.handleMouseDown}
+                className="envelope" style={{
+                WebkitTransform: `translate3d(${x}px, 0, 0)`,
+                transform: `translate3d(${x}px, 0, 0)`,
+              }}>
+                <div className='envelope-text'>A card from {card.name}<br />Click me to open</div>
+              </div>
+            </>
+          }
+        </Motion>
         <br />
         <Link to="/home">
-          <Button variant="dark" type="button" id="card-view-button">
+          <Button className='final-card-button' variant="dark" type="button">
             Make your own card!
           </Button>
         </Link>
