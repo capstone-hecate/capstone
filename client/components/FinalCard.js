@@ -4,8 +4,7 @@ import {connect} from 'react-redux'
 import {addUrl, sendEmail} from '../store/card'
 import Button from 'react-bootstrap/Button'
 import history from '../history'
-import {Motion, spring} from 'react-motion';
-
+import {Motion, spring} from 'react-motion'
 
 class FinalCard extends React.Component {
   constructor(props) {
@@ -17,8 +16,8 @@ class FinalCard extends React.Component {
   }
 
   handleMouseDown = () => {
-    this.setState({open: !this.state.open});
-  };
+    this.setState({open: !this.state.open})
+  }
 
   componentDidMount() {
     let canvas = this.canvas.current
@@ -27,16 +26,16 @@ class FinalCard extends React.Component {
     let x, y
 
     let templates = {
-      thankYou: {imgSrc: 'thank-you.jpg', fontColor: '#5f826d', x: 100, y: 175},
+      thankYou: {imgSrc: 'thank-you.jpg', fontColor: '#5f826d', x: 90, y: 175},
       happyBirthday: {
         imgSrc: 'happy-birthday.jpg',
         fontColor: '#a45464',
         x: 30,
         y: 175
       },
-      general: {imgSrc: 'general.jpg', fontColor: 'black', x: 25, y: 290},
-      floral: {imgSrc: 'floral.jpg', fontColor: 'white', x: 35, y: 150},
-      congrats: {imgSrc: 'congrats.jpg', fontColor: 'white', x: 75, y: 250},
+      general: {imgSrc: 'general.jpg', fontColor: 'black', x: 25, y: 318},
+      floral: {imgSrc: 'floral.jpg', fontColor: 'white', x: 35, y: 155},
+      congrats: {imgSrc: 'congrats.jpg', fontColor: 'white', x: 75, y: 290},
       getWell: {imgSrc: 'get-well.jpg', fontColor: '#1a432c', x: 75, y: 250}
     }
 
@@ -60,12 +59,12 @@ class FinalCard extends React.Component {
       this.setState({canvasUrl: {Url: URL}})
     }
     if (this.props.template.template === 'general') {
-      let userImg = new Image(600, 270)
+      let userImg = new Image(600, 300)
 
       userImg.src = localStorage.getItem('currentImage')
 
       userImg.onload = () => {
-        ctx.drawImage(userImg, 0, 0, 600, 270)
+        ctx.drawImage(userImg, 0, 0, 600, 300)
         let URL = canvas.toDataURL()
         this.setState({canvasUrl: {Url: URL}})
       }
@@ -82,26 +81,35 @@ class FinalCard extends React.Component {
     return (
       <Container id="final-card">
         <Motion style={{x: spring(this.state.open ? -650 : 0)}}>
-          {({x}) =>
+          {({x}) => (
             <>
-              <canvas ref={this.canvas} width="600" height='434.11' />
+              <canvas ref={this.canvas} width="600" height="434.11" />
               <div
                 onMouseDown={this.handleMouseDown}
-                className="envelope" style={{
-                WebkitTransform: `translate3d(${x}px, 0, 0)`,
-                transform: `translate3d(${x}px, 0, 0)`,
-              }}>
-                <div className='envelope-text'>A card from {this.props.card.card.name}<br />Click me to open</div>
+                className="envelope"
+                style={{
+                  WebkitTransform: `translate3d(${x}px, 0, 0)`,
+                  transform: `translate3d(${x}px, 0, 0)`
+                }}
+              >
+                <div className="envelope-text">
+                  A card from {this.props.card.card.name}
+                  <br />Click me to open
+                </div>
               </div>
             </>
-          }
+          )}
         </Motion>
         <br />
-        <Button className='final-card-button' variant="dark" onClick={this.onClick}>
+        <Button
+          className="final-card-button"
+          variant="dark"
+          onClick={this.onClick}
+        >
           Send my card!
         </Button>
         <Button
-          className='final-card-button'
+          className="final-card-button"
           variant="dark"
           onClick={() => {
             history.push('/')
