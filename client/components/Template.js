@@ -1,29 +1,46 @@
 import React from 'React'
+import {Link} from 'react-scroll'
+import {setTemplate} from '../store/template'
+import {connect} from 'react-redux'
 
 class Template extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {template: '', clicked: false}
     this.onClick = this.onClick.bind(this)
   }
 
   onClick(templateName) {
-    this.setState({template: templateName, clicked: !this.state.clicked})
-    console.log(this.state)
+    this.props.setTemplate(templateName)
   }
 
   render() {
     let name = this.props.template.name
     return (
-      <img
-        src={this.props.template.image}
-        width="300"
-        alt={this.props.template.name}
-        onClick={() => this.onClick({name})}
-        className={this.state.clicked ? 'bordered-image' : ''}
-      />
+      <Link
+        activeClass="active"
+        to="card"
+        smooth={true}
+        spy={true}
+        offset={-70}
+        duration={500}
+      >
+        <div className="image-div">
+          <img
+            src={this.props.template.image}
+            width="300"
+            alt={this.props.template.name}
+            onClick={() => this.onClick(name)}
+          />
+        </div>
+      </Link>
     )
   }
 }
 
-export default Template
+const mapDispatch = dispatch => {
+  return {
+    setTemplate: templateName => dispatch(setTemplate(templateName))
+  }
+}
+
+export default connect(null, mapDispatch)(Template)

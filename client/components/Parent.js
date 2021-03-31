@@ -18,16 +18,15 @@ class Parent extends React.Component {
     this.setState({text: text})
   }
   render() {
-    console.log(this.state, 'Parent.js state')
     return (
       <>
         <ChooseTemplate
-          selectTemplate={template => this.selectTemplate(template)}
+        // selectTemplate={template => this.selectTemplate(template)}
         />
         <Empty />
         <Card
-          template={this.state.template}
-          setGeneratedText={text => this.setGeneratedText(text)}
+        // template={this.state.template}
+        // setGeneratedText={text => this.setGeneratedText(text)}
         />
       </>
     )

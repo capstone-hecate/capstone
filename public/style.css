@@ -137,3 +137,12 @@ a:hover {
   display: flex;
   justify-content: center;
 }
+
+.templates-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-div {
+  width: 300;
+}
