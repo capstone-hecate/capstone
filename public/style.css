@@ -74,8 +74,13 @@ canvas {
 }
 
 .empty-div {
-  height: 500px;
-  width: 100vh;
+  height: 400px;
+  /* width: 100vh; */
+  /* background-image: url('good-vibes.jpg'); */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hidden {
@@ -131,6 +136,10 @@ a:hover {
 #card-view {
   display: flex;
   justify-content: center;
+}
+
+#choose-template {
+  margin: 0;
 }
 
 .button-container {

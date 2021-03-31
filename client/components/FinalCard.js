@@ -25,11 +25,12 @@ class FinalCard extends React.Component {
     const ctx = canvas.getContext('2d')
     var img = new Image(600)
     let x, y
+    const templateName = this.props.template.name
 
-    img.src = templates[this.props.template.template].imgSrc
-    ctx.fillStyle = templates[this.props.template.template].fontColor
-    x = templates[this.props.template.template].x
-    y = templates[this.props.template.template].y
+    img.src = templates[templateName].imgSrc
+    ctx.fillStyle = templates[templateName].fontColor
+    x = templates[templateName].x
+    y = templates[templateName].y
 
     let cardContainer = this.props.card || {}
     let card = cardContainer.card || {}
@@ -45,7 +46,7 @@ class FinalCard extends React.Component {
       let URL = canvas.toDataURL()
       this.setState({canvasUrl: {Url: URL}})
     }
-    if (this.props.template.template === 'general') {
+    if (templateName === 'general') {
       let userImg = new Image(600, 300)
 
       userImg.src = localStorage.getItem('currentImage')
@@ -112,7 +113,7 @@ class FinalCard extends React.Component {
 const mapState = state => {
   return {
     card: state.card,
-    template: state.template
+    template: state.template.template
   }
 }
 
