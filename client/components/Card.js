@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {createNewCard} from '../store/card'
 import {connect} from 'react-redux'
 import Form from 'react-bootstrap/Form'
@@ -6,7 +6,6 @@ import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import {corpusMaker, generatePoem} from '../word-markov'
 import {Link} from 'react-scroll'
-import {render} from 'enzyme'
 import history from '../history'
 
 class Card extends React.Component {
@@ -188,9 +187,15 @@ class Card extends React.Component {
   }
 }
 
+const mapState = state => {
+  return {
+    template: state.template.template
+  }
+}
+
 const mapDispatch = dispatch => {
   return {
     createNewCard: card => dispatch(createNewCard(card))
   }
 }
-export default connect(null, mapDispatch)(Card)
+export default connect(mapState, mapDispatch)(Card)

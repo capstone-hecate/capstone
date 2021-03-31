@@ -4,8 +4,7 @@ import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import {Link} from 'react-router-dom'
-import {Motion, spring} from 'react-motion';
-
+import {Motion, spring} from 'react-motion'
 
 class CardView extends React.Component {
   constructor() {
@@ -18,8 +17,8 @@ class CardView extends React.Component {
   }
 
   handleMouseDown = () => {
-    this.setState({open: !this.state.open});
-  };
+    this.setState({open: !this.state.open})
+  }
 
   render() {
     let card = this.props.card.card || {}
@@ -27,23 +26,28 @@ class CardView extends React.Component {
     return (
       <Container id="card-view">
         <Motion style={{x: spring(this.state.open ? -650 : 0)}}>
-          {({x}) =>
+          {({x}) => (
             <>
-              <img className='card-view' src={image} />
+              <img className="card-view" src={image} />
               <div
                 onMouseDown={this.handleMouseDown}
-                className="envelope" style={{
-                WebkitTransform: `translate3d(${x}px, 0, 0)`,
-                transform: `translate3d(${x}px, 0, 0)`,
-              }}>
-                <div className='envelope-text'>A card from {card.name}<br />Click me to open</div>
+                className="envelope"
+                style={{
+                  WebkitTransform: `translate3d(${x}px, 0, 0)`,
+                  transform: `translate3d(${x}px, 0, 0)`
+                }}
+              >
+                <div className="envelope-text">
+                  A card from {card.name}
+                  <br />Click me to open
+                </div>
               </div>
             </>
-          }
+          )}
         </Motion>
         <br />
         <Link to="/home">
-          <Button className='final-card-button' variant="dark" type="button">
+          <Button className="final-card-button" variant="dark" type="button">
             Make your own card!
           </Button>
         </Link>
@@ -53,7 +57,6 @@ class CardView extends React.Component {
 }
 
 const mapState = state => {
-  console.log('mapping state to props with state', state)
   return {
     card: state.card
   }
