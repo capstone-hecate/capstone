@@ -34,7 +34,6 @@ class Card extends React.Component {
       this.state.name
     }`
     this.setState({text: generatedText})
-    this.props.setGeneratedText(generatedText)
     this.setState({generating: false})
   }
 
