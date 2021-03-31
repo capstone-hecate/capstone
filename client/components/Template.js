@@ -1,4 +1,4 @@
-import React from 'React'
+import React from 'react'
 import {Link} from 'react-scroll'
 import {setTemplate} from '../store/template'
 import {connect} from 'react-redux'
