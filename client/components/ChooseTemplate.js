@@ -99,9 +99,11 @@ class ChooseTemplate extends React.Component {
               offset={-70}
               duration={500}
             >
-              <Button type="submit" variant="dark">
-                Next step
-              </Button>
+              <div className="button-container">
+                <Button type="submit" variant="dark">
+                  Next step
+                </Button>
+              </div>
             </Link>
           </div>
         </Jumbotron>

@@ -64,14 +64,13 @@ canvas {
 .btn {
   background-color: purple;
   border: purple;
-  margin: 10px;
+  margin: 20px 10px;
 }
 
 .final-card-button {
   position: relative;
+  display: inline-block;
   top: 420px;
-  left: 20px;
-
 }
 
 .empty-div {
@@ -119,11 +118,22 @@ a:hover {
   background-size: 600px 434.11px;
 }
 
-
 .envelope-text {
   font-family: 'Brush Script MT', cursive;
   font-size: 2em;
   left: 100px;
   text-align: center;
   margin: 80px;
+}
+
+#card,
+#final-card,
+#card-view {
+  display: flex;
+  justify-content: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
 }
