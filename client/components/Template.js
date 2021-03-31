@@ -22,14 +22,14 @@ class Template extends React.Component {
         smooth={true}
         spy={true}
         offset={-70}
-        duration={500}
+        duration={1000}
       >
         <div className="image-div">
           <img
             src={this.props.template.image}
             width="300"
             alt={this.props.template.name}
-            onClick={() => this.onClick(name)}
+            onClick={() => this.onClick(this.props.template)}
           />
         </div>
       </Link>
