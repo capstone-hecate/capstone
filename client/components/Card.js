@@ -45,6 +45,8 @@ class Card extends React.Component {
   }
 
   render() {
+    let template = this.props.template || {}
+    let name = template.name || ''
     return (
       <Jumbotron id="card">
         <Form
@@ -114,7 +116,7 @@ class Card extends React.Component {
               Please enter recipient email.
             </Form.Control.Feedback>
 
-            {this.props.template === 'general' && (
+            {name === 'general' && (
               <>
                 <Form.Label>Upload your photo</Form.Label>
                 <Form.Control
