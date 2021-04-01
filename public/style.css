@@ -159,4 +159,5 @@ a:hover {
   margin: 2px;
   padding: 2px;
   height: 21px;
+  box-shadow: none;
 }
