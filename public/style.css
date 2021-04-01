@@ -26,9 +26,9 @@ h3 {
 }
 
 img {
-  padding: 10px;
   margin: 10px;
   border-radius: 10%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 canvas {
@@ -36,6 +36,7 @@ canvas {
   position: absolute;
   width: 600px;
   height: 434.11px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card-view {
@@ -70,13 +71,11 @@ canvas {
 .final-card-button {
   position: relative;
   display: inline-block;
-  top: 420px;
+  top: 450px;
 }
 
 .empty-div {
   height: 400px;
-  /* width: 100vh; */
-  /* background-image: url('good-vibes.jpg'); */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -115,12 +114,12 @@ a:hover {
 }
 .envelope {
   position: fixed;
-  width: 600px;
-  height: 434.11px;
+  width: 640px;
+  height: 465px;
   border-radius: 4px;
   background: no-repeat;
   background-image: url('envelope.png');
-  background-size: 600px 434.11px;
+  background-size: 640px 465px;
 }
 
 .envelope-text {
