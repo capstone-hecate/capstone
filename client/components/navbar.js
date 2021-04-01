@@ -19,6 +19,7 @@ const NavBar = ({handleClick, isLoggedIn}) => (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          <Link to="/about">About</Link>
         </div>
       ) : (
         <div>
