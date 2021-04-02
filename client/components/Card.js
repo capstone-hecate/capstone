@@ -194,7 +194,7 @@ class Card extends React.Component {
               Please enter your message or click "Generate message" button.
             </Form.Control.Feedback>
             <Form.Text className="text-muted">
-              We have two different technologies to generate text! Feel free to try both and edit the text afterwards. Click on a button again to generate new text.<br/> Note: Machine learning will take a few extra seconds.
+              We have two different technologies to generate text! Feel free to try both and edit the text afterwards.<br/>Click on a button again to generate new text. Note: Machine learning will take a few extra seconds.
             </Form.Text>
             <div className='button-container'>
               <Button variant="dark" type="submit">
