@@ -15,6 +15,8 @@ Front-end:
 * React-Bootstrap
 * React-Motion
 * React-scroll
+* Tensorflow
+* ml5.js
 
 Back-end:
 
