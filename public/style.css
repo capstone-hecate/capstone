@@ -161,3 +161,9 @@ a:hover {
   height: 21px;
   box-shadow: none;
 }
+
+.generate-button {
+  background-color: transparent;
+  border: 1px solid black;
+  margin: 5px 5px 5px;
+}
