@@ -31,3 +31,16 @@ export const templates = {
     y: 200
   }
 }
+
+export const lineMaker = (string) => {
+  //split the string into an Array of words delimited by space
+  let arrayOfWords = string.split(' ');
+
+  for(let i = 0; i < arrayOfWords.length; i++){
+    if(i%8 === 0 && i !== 0){
+      arrayOfWords[i] += '\n'
+    }
+  }
+  const result = arrayOfWords.slice(0, 25)
+  return result.join(' ')
+}
