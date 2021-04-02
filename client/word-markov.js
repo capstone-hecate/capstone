@@ -80,7 +80,7 @@ export const generatePoem = (corpus, lines) => {
   let poem = ''
 
   for (let i = 0; i < lines; i++) {
-    let l = Math.floor(Math.random() * 10) + 1
+    let l = Math.floor(Math.random() * 7) + 1
     poem += writeLine(corpus, l)
     poem += '\n'
   }

@@ -50,8 +50,8 @@ class Card extends React.Component {
   }
 
   async getText() {
-    const rnn = ml5.charRNN('/models/corpus2/');
-    await rnn.generate({seed: 'She was ', length: 140}, (err, results) => {
+    const rnn = ml5.charRNN('/models/quotes/');
+    await rnn.generate({seed: 'Wishing you a ', length: 140}, (err, results) => {
       console.log(err)
       let text = results.sample
       console.log("unedited text", text)
@@ -194,7 +194,7 @@ class Card extends React.Component {
               Please enter your message or click "Generate message" button.
             </Form.Control.Feedback>
             <Form.Text className="text-muted">
-              We have two different technologies to generate text! Feel free to try both and edit the text afterwards.<br/> Note: Machine learning will take a few extra seconds.
+              We have two different technologies to generate text! Feel free to try both and edit the text afterwards. Click on a button again to generate new text.<br/> Note: Machine learning will take a few extra seconds.
             </Form.Text>
             <div className='button-container'>
               <Button variant="dark" type="submit">

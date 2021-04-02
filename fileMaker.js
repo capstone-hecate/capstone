@@ -3,21 +3,17 @@ const fs = require('fs')
 
 // Data which will write in a file.
 async function apiFetch() {
-  let data = ''
-  const request = await axios.request({
+  let corpus = ''
+  const results = await axios.request({
     method: 'GET',
     url: 'https://type.fit/api/quotes'
   })
-  let poemLines = request.data
-  while(poemLines.length > 0){
-    let lines = poemLines.shift().lines
-    for(let i = 0; i < lines.length; i++){
-      if(lines[i].search("-") ===-1){
-        data+= lines[i]
-      }
-    }
+  const quotes = results.data
+  for (let i = 0; i < quotes.length; i++) {
+    corpus += quotes[i].text
+    corpus += ' '
   }
-  return data
+  return corpus
 }
 
 apiFetch().then((result) => {
