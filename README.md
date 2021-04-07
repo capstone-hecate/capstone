@@ -27,6 +27,14 @@ Back-end:
 * Nodemailer
 * Passport
 
+## How to run locally
+
+1.  `git clone https://github.com/capstone-hecate/eGreetr.git`
+2.  `cd eGreetr`
+3.  `npm install`
+4.  `npm run start-dev`
+5.  Open http://localhost:8080/ on your browser
+
 ## Our Team
 
 * Anat Hochberg https://github.com/ahoch10
